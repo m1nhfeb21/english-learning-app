@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run English Learning",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "./gradlew installDebug && adb shell monkey -p com.example.englishlearningsoftware 1"
+        }
+    ]
+}

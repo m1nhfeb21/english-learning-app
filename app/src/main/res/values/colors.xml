@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Các màu mặc định (có thể có hoặc không) -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Các màu dùng cho giao diện Login -->
+    <color name="bg_dark">#111827</color>
+    <color name="text_red">#DC2626</color>
+    <color name="btn_blue">#4F46E5</color>
+    <color name="bg_input">#F3F4F6</color>
+    <color name="text_gray">#6B7280</color>
+</resources>
