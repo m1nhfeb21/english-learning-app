@@ -1,32 +1,32 @@
 <resources>
     <string name="app_name">English Learning</string>
-    <!-- Android Emulator: máy tính chạy backend. Điện thoại thật: đổi sang IP LAN. -->
+    <!-- Android Emulator: host computer address. Physical device: use the host LAN IP. -->
     <string name="api_base_url" translatable="false">http://10.0.2.2:8080/</string>
     <string name="login">LOGIN</string>
     <string name="create_account">CREATE ACCOUNT</string>
-    <string name="login_loading">ĐANG ĐĂNG NHẬP…</string>
-    <string name="register_loading">ĐANG TẠO…</string>
-    <string name="enter_all_fields">Vui lòng nhập đủ thông tin!</string>
-    <string name="password_mismatch">Mật khẩu không khớp!</string>
-    <string name="register_success">Tạo tài khoản thành công!</string>
-    <string name="invalid_backend_data">Backend trả dữ liệu không đúng!</string>
-    <string name="invalid_registration_data">Không thể tạo dữ liệu đăng ký.</string>
-    <string name="connection_error">Không kết nối được backend. Kiểm tra địa chỉ API và máy chủ.</string>
-    <string name="login_invalid">Dữ liệu đăng nhập không hợp lệ!</string>
-    <string name="login_unauthorized">Sai tài khoản hoặc mật khẩu!</string>
-    <string name="login_api_not_found">Không tìm thấy API Login!</string>
-    <string name="backend_error">Backend đang gặp lỗi!</string>
-    <string name="login_http_error">Backend trả lỗi HTTP %1$d</string>
-    <string name="register_http_error">Lỗi đăng ký: HTTP %1$d</string>
-    <string name="preview_button">Xem thử giao diện (không cần backend)</string>
+    <string name="login_loading">SIGNING IN…</string>
+    <string name="register_loading">CREATING ACCOUNT…</string>
+    <string name="enter_all_fields">Please fill in all required fields.</string>
+    <string name="password_mismatch">Passwords do not match.</string>
+    <string name="register_success">Account created successfully!</string>
+    <string name="invalid_backend_data">The server returned invalid data.</string>
+    <string name="invalid_registration_data">Could not prepare account registration data.</string>
+    <string name="connection_error">Cannot connect to the server. Check the API address and server.</string>
+    <string name="login_invalid">Invalid login details.</string>
+    <string name="login_unauthorized">Incorrect account details or password.</string>
+    <string name="login_api_not_found">Login API not found.</string>
+    <string name="backend_error">The server encountered an error.</string>
+    <string name="login_http_error">The server returned HTTP error %1$d</string>
+    <string name="register_http_error">Registration failed: HTTP %1$d</string>
+    <string name="preview_button">Preview the app (no server required)</string>
     <string name="home_title">English Learning</string>
-    <string name="welcome_back">Chào mừng bạn trở lại!</string>
-    <string name="welcome_name">Xin chào %1$s!</string>
-    <string name="preview_welcome">Cùng bắt đầu học tiếng Anh</string>
-    <string name="preview_status">Bạn đang xem thử giao diện, chưa đăng nhập.</string>
-    <string name="logged_in_status">Đăng nhập thành công.</string>
-    <string name="home_description">Màn Home cơ bản. Nhóm sẽ bổ sung các màn học tập vào đây.</string>
-    <string name="planned_features">Từ vựng theo chủ đề\nFlashcard và ôn tập\nQuét từ bằng camera\nLuyện tập và AI\nHồ sơ và tiến độ học</string>
-    <string name="back_to_login">Quay lại đăng nhập</string>
-    <string name="logout">Đăng xuất</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="welcome_name">Hello %1$s!</string>
+    <string name="preview_welcome">Start learning English</string>
+    <string name="preview_status">Preview mode. You are not signed in.</string>
+    <string name="logged_in_status">Signed in successfully.</string>
+    <string name="home_description">Upcoming learning activities</string>
+    <string name="planned_features">Topic vocabulary\nFlashcards and review\nCamera word scanning\nPractice and AI\nProfile and learning progress</string>
+    <string name="back_to_login">Back to login</string>
+    <string name="logout">Sign out</string>
 </resources>

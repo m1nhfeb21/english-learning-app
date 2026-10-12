@@ -38,6 +38,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation("androidx.test:core:1.5.0")
-    // OkHttp hỗ trợ callback Java, không cần coroutine hay Retrofit.
+    // OkHttp supports Java callbacks without coroutines or Retrofit.
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
 }

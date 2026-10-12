@@ -11,7 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-/** Màn Home cơ bản để nhóm tiếp tục xây dựng các chức năng học tập. */
+/** Starter Home screen for future learning features. */
 public class HomeActivity extends AppCompatActivity {
     public static final String EXTRA_FIRST_NAME = "firstName";
     public static final String EXTRA_LAST_NAME = "lastName";

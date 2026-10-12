@@ -13,7 +13,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-/** Gọi mạng bằng callback Java; Activity cập nhật giao diện bằng runOnUiThread. */
+/** Makes network requests with Java callbacks; the Activity updates views with runOnUiThread. */
 public class AccountApi {
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     private final HttpUrl baseUrl;
@@ -32,7 +32,7 @@ public class AccountApi {
         this.baseUrl = HttpUrl.get(baseUrl);
     }
 
-    // Giữ hợp đồng API của repo gốc. Không ghi URL/mật khẩu vào log.
+    // Preserve the original API contract. Never log login URLs or passwords.
     Request loginRequest(String loginInput, String password) {
         boolean isEmail = loginInput.contains("@");
         HttpUrl url = baseUrl.newBuilder()
@@ -69,7 +69,7 @@ public class AccountApi {
 
             @Override
             public void onResponse(Call call, Response response) {
-                // Đóng response kể cả khi đọc dữ liệu thất bại.
+                // Close the response even if reading its body fails.
                 try (Response result = response) {
                     ResponseBody body = result.body();
                     String text = body == null ? "" : body.string();
