@@ -3,6 +3,7 @@ package com.example.englishlearningsoftware;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,8 @@ public class ScannerActivity extends AppCompatActivity {
 
         cameraPreview = findViewById(R.id.cameraPreview);
         tvResult = findViewById(R.id.tvResult);
+        ImageButton btnClose = findViewById(R.id.btnCloseScanner);
+        btnClose.setOnClickListener(view -> finish());
         cameraExecutor = Executors.newSingleThreadExecutor();
         labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS);
 
