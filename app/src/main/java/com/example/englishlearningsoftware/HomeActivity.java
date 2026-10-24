@@ -25,7 +25,10 @@ public class HomeActivity extends AppCompatActivity {
         final boolean preview = getIntent().getBooleanExtra(EXTRA_PREVIEW, false);
         TextView welcome = findViewById(R.id.tvWelcome);
         TextView status = findViewById(R.id.tvHomeStatus);
+        Button btnScan = findViewById(R.id.btnScan);
         Button btnLogout = findViewById(R.id.btnLogout);
+        btnScan.setOnClickListener(view ->
+                startActivity(new Intent(HomeActivity.this, ScannerActivity.class)));
         if (preview) {
             welcome.setText(R.string.preview_welcome);
             status.setText(R.string.preview_status);

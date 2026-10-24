@@ -57,6 +57,15 @@
                 android:textSize="16sp" />
         </LinearLayout>
         <Button
+            android:id="@+id/btnScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Scan object"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_btn_primary"
+            app:backgroundTint="@null" />
+        <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
