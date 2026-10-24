@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Giao diện học flashcard và danh sách từ vựng -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/flashcardRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Thanh tiêu đề phía trên: nút quay lại và nút mở form thêm từ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="12dp">
+
+        <Button
+            android:id="@+id/btnBackHome"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="◀ Về Home"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_btn_outline" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="FLASHCARD TỪ VỰNG"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_red" />
+
+        <Button
+            android:id="@+id/btnToggleAddForm"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="+ Thêm từ"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_btn_primary" />
+    </LinearLayout>
+
+    <!-- Khung thẻ flashcard lật mặt trước và mặt sau -->
+    <FrameLayout
+        android:id="@+id/cardContainer"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <!-- Mặt trước: từ tiếng Anh và loại từ -->
+        <LinearLayout
+            android:id="@+id/layoutCardFront"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_card_front"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvCardWord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vocabulary"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#111827" />
+
+            <TextView
+                android:id="@+id/tvCardType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="(Noun)"
+                android:textSize="15sp"
+                android:textColor="#4F46E5"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="👆 Chạm vào thẻ để lật xem nghĩa"
+                android:textSize="12sp"
+                android:textColor="#9CA3AF" />
+        </LinearLayout>
+
+        <!-- Mặt sau: nghĩa tiếng Việt và ví dụ -->
+        <LinearLayout
+            android:id="@+id/layoutCardBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_card_back"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvCardMeaning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Từ vựng"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#0369A1"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tvCardExample"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Ví dụ: Expanding your vocabulary is essential."
+                android:textSize="13sp"
+                android:textColor="#374151"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="👆 Chạm vào thẻ để quay lại từ vựng"
+                android:textSize="12sp"
+                android:textColor="#6B7280" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Nút chuyển qua lại giữa các thẻ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/btnPrevCard"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="◀ Từ trước"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_btn_primary" />
+
+        <TextView
+            android:id="@+id/tvCardCounter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Thẻ 1 / 5"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnNextCard"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Từ tiếp ▶"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_btn_primary" />
+    </LinearLayout>
+
+    <!-- Form nhập để thêm từ mới -->
+    <LinearLayout
+        android:id="@+id/layoutAddForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#1E293B"
+        android:padding="12dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhập thông tin từ mới:"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/etNewWord"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="2"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_input"
+                android:hint="Từ tiếng Anh (*)"
+                android:textColor="#000"
+                android:paddingHorizontal="10dp"
+                android:textSize="14sp"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etNewType"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_input"
+                android:hint="Loại từ"
+                android:textColor="#000"
+                android:paddingHorizontal="10dp"
+                android:textSize="14sp"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etNewMeaning"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_input"
+            android:hint="Nghĩa tiếng Việt (*)"
+            android:textColor="#000"
+            android:paddingHorizontal="10dp"
+            android:textSize="14sp"
+            android:singleLine="true"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etNewExample"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_input"
+            android:hint="Câu ví dụ minh họa"
+            android:textColor="#000"
+            android:paddingHorizontal="10dp"
+            android:textSize="14sp"
+            android:singleLine="true"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnSaveWord"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:text="LƯU TỪ VỰNG VÀO DATABASE"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_btn_primary" />
+    </LinearLayout>
+
+    <!-- Tiêu đề danh sách từ đã lưu -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Danh sách từ đã lưu"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="(Chạm để học - Nhấn giữ để xóa)"
+            android:textColor="#9CA3AF"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <!-- Danh sách từ vựng hiển thị bằng ListView -->
+    <ListView
+        android:id="@+id/lvFlashcards"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_bottom_sheet"
+        android:divider="#E5E7EB"
+        android:dividerHeight="1dp"
+        android:padding="8dp" />
+
+</LinearLayout>

@@ -50,6 +50,16 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        // Bấm nút này để chuyển qua màn hình học Flashcard
+        Button btnFlashcard = findViewById(R.id.btnFlashcard);
+        btnFlashcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, FlashcardActivity.class);
+                startActivity(intent);
+            }
+        });
         View root = findViewById(R.id.homeRoot);
         final int padding = root.getPaddingLeft();
         ViewCompat.setOnApplyWindowInsetsListener(root,

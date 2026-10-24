@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nền cho mặt sau của thẻ Flashcard khi lật ra -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#EEF2FF"/>
+    <corners android:radius="16dp"/>
+    <stroke android:width="2dp" android:color="#0284C7"/>
+</shape>
