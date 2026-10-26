@@ -10,10 +10,12 @@
         android:theme="@style/Theme.EnglishLearningSoftware">
 
         <activity android:name=".HomeActivity" android:exported="false" />
+        <activity android:name=".FlashcardActivity" android:exported="false" />
         <activity android:name=".ProfileActivity" android:exported="false" />
         <activity android:name=".EditProfileActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
 
         <activity
             android:name=".MainActivity"

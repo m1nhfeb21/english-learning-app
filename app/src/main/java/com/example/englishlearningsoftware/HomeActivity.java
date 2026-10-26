@@ -64,6 +64,7 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         });
 
+
         View root = findViewById(R.id.homeRoot);
         final int padding = root.getPaddingLeft();
         ViewCompat.setOnApplyWindowInsetsListener(root, (view, windowInsets) -> {
