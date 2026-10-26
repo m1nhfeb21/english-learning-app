@@ -33,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         TextView status = findViewById(R.id.tvHomeStatus);
         Button btnLogout = findViewById(R.id.btnLogout);
 
+
         if (preview) {
             welcome.setText(R.string.preview_welcome);
             status.setText(R.string.preview_status);
