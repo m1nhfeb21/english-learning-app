@@ -30,16 +30,11 @@ public class HomeActivity extends AppCompatActivity {
 
         preview = getIntent().getBooleanExtra(EXTRA_PREVIEW, false);
         welcome = findViewById(R.id.tvWelcome);
-        TextView status = findViewById(R.id.tvHomeStatus);
         Button btnLogout = findViewById(R.id.btnLogout);
-
 
         if (preview) {
             welcome.setText(R.string.preview_welcome);
-            status.setText(R.string.preview_status);
             btnLogout.setText(R.string.back_to_login);
-        } else {
-            status.setText(R.string.logged_in_status);
         }
 
         findViewById(R.id.btnOpenProfile).setOnClickListener(view -> {
