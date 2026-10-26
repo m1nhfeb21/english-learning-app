@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/profile_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="156dp"
+            android:padding="24dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/bg_profile_header">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_edit"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/profile_edit_description"
+                android:textSize="14sp"
+                android:textColor="#FADDE1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:padding="18dp"
+            android:background="@drawable/bg_profile_card"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_name_label"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etProfileName"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="14dp"
+                android:background="@drawable/bg_input"
+                android:hint="@string/profile_name_hint"
+                android:textColor="#111827"
+                android:inputType="textPersonName"
+                android:singleLine="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/profile_goal_title"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etProfileGoal"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="14dp"
+                android:background="@drawable/bg_input"
+                android:hint="@string/profile_goal_hint"
+                android:textColor="#111827"
+                android:inputType="textCapSentences"
+                android:singleLine="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/profile_minutes_label"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etProfileMinutes"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="14dp"
+                android:background="@drawable/bg_input"
+                android:hint="@string/profile_minutes_hint"
+                android:textColor="#111827"
+                android:inputType="number"
+                android:singleLine="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/profile_demo_note"
+                android:textSize="12sp"
+                android:textColor="@color/text_gray"/>
+
+            <Button
+                android:id="@+id/btnSaveProfile"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="26dp"
+                android:text="@string/profile_save"
+                android:textColor="@android:color/white"
+                android:background="@drawable/bg_btn_primary"
+                app:backgroundTint="@null"/>
+
+            <Button
+                android:id="@+id/btnCancelEditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/profile_cancel"
+                android:textColor="@color/profile_red_dark"
+                android:background="@drawable/bg_btn_outline"
+                app:backgroundTint="@null"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
