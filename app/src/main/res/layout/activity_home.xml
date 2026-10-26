@@ -56,6 +56,69 @@
                 android:textColor="@color/text_gray"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <!-- Quick access: original dark theme is preserved. -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/home_navigation"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnOpenProfile"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="@string/home_profile_shortcut"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_btn_primary"
+            app:backgroundTint="@null"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:id="@+id/btnOpenFlashcards"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="@string/home_flashcard_shortcut"
+                android:textAllCaps="false"
+                android:textColor="@color/text_gray"
+                android:background="@drawable/bg_btn_outline"
+                app:backgroundTint="@null"/>
+
+            <Button
+                android:id="@+id/btnOpenCamera"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:text="@string/home_camera_shortcut"
+                android:textAllCaps="false"
+                android:textColor="@color/text_gray"
+                android:background="@drawable/bg_btn_outline"
+                app:backgroundTint="@null"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnOpenPractice"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/home_practice_shortcut"
+            android:textAllCaps="false"
+            android:textColor="@color/text_gray"
+            android:background="@drawable/bg_btn_outline"
+            app:backgroundTint="@null"/>
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"

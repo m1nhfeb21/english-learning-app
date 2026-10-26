@@ -10,4 +10,9 @@
     <color name="btn_blue">#4F46E5</color>
     <color name="bg_input">#F3F4F6</color>
     <color name="text_gray">#6B7280</color>
+    <color name="profile_background">#F5F5F5</color>
+    <color name="profile_card">#FFFFFFFF</color>
+    <color name="profile_red_dark">#8F1D2C</color>
+    <color name="profile_red_light">#FCE7EA</color>
+    <color name="profile_green">#198754</color>
 </resources>
