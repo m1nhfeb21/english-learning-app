@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,6 +19,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/text_red" />
+
         <TextView
             android:id="@+id/tvWelcome"
             android:layout_width="match_parent"
@@ -28,7 +30,7 @@
             android:textStyle="bold"
             android:textColor="@android:color/white" />
 
-        <!-- Quick access: original dark theme is preserved. -->
+        <!-- Quick access -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,6 +41,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <!-- Hồ sơ -->
         <Button
             android:id="@+id/btnOpenProfile"
             android:layout_width="match_parent"
@@ -49,6 +52,7 @@
             android:background="@drawable/bg_btn_primary"
             app:backgroundTint="@null"/>
 
+        <!-- Bộ thẻ + Camera -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,21 +84,99 @@
                 app:backgroundTint="@null"/>
         </LinearLayout>
 
+        <!-- Section label bài tập -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="Bài tập luyện tập"
+            android:textColor="@android:color/white"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <!-- Trắc Nghiệm + Điền Từ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/btnOpenQuiz"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="🧩 Trắc Nghiệm"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_primary_red"
+                app:backgroundTint="@null"/>
+
+            <Button
+                android:id="@+id/btnOpenFillBlank"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:text="✏️ Điền Từ"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_primary_red"
+                app:backgroundTint="@null"/>
+        </LinearLayout>
+
+        <!-- Luyện Nghe + Luyện Viết -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/btnOpenListening"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="🎧 Luyện Nghe"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_btn_primary"
+                app:backgroundTint="@null"/>
+
+            <Button
+                android:id="@+id/btnOpenWriting"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:text="📝 Luyện Viết"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_btn_primary"
+                app:backgroundTint="@null"/>
+        </LinearLayout>
+
+        <!-- Bài làm chung -->
         <Button
             android:id="@+id/btnOpenPractice"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/home_practice_shortcut"
             android:textAllCaps="false"
             android:textColor="@color/text_gray"
             android:background="@drawable/bg_btn_outline"
             app:backgroundTint="@null"/>
+
+        <!-- Đăng xuất -->
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="18dp"
             android:text="@string/logout"
             android:textColor="@android:color/white"
             android:background="@drawable/bg_btn_primary"

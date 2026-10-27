@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Giao diện Luyện Nghe (Listening Exercise) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listeningRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9FAFB"
+    android:orientation="vertical">
+
+    <!-- ── HEADER ─────────────────────────────────────────────── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:id="@+id/btnListenBack"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="◀"
+            android:textColor="#111827"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Luyện Nghe"
+            android:textColor="#111827"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvListenCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_tag_blue"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="1 / 5"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- ── PROGRESS BAR ──────────────────────────────────────── -->
+    <ProgressBar
+        android:id="@+id/listenProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:max="100"
+        android:progress="20"
+        android:progressBackgroundTint="#E5E7EB"
+        android:progressTint="#DC2626" />
+
+    <!-- ── SCROLL CONTENT ────────────────────────────────────── -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Tag + điểm -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="14dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_tag_blue"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="Luyện Nghe"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_timer_badge"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⭐ "
+                        android:textSize="12sp"
+                        android:textColor="#92400E" />
+                    <TextView
+                        android:id="@+id/tvListenScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 điểm"
+                        android:textColor="#92400E"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- ── KHUNG PHÁT ÂM ───────────────────────────── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_card"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nghe và chọn từ bạn nghe thấy"
+                    android:textColor="#9CA3AF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Nút phát âm lớn -->
+                <LinearLayout
+                    android:id="@+id/btnPlayAudio"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/bg_play_btn"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:elevation="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔊"
+                        android:textSize="36sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Nhấn để nghe"
+                    android:textColor="#9CA3AF"
+                    android:textSize="13sp" />
+
+                <!-- Nút phát lại nhỏ -->
+                <TextView
+                    android:id="@+id/btnReplayAudio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_btn_outline"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="🔄 Phát lại"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp" />
+
+                <!-- Từ đang học (ẩn cho đến khi trả lời) -->
+                <TextView
+                    android:id="@+id/tvRevealWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="vocabulary"
+                    android:textColor="#4F46E5"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- ── 4 LỰA CHỌN ──────────────────────────────── -->
+            <LinearLayout
+                android:id="@+id/optionLA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_quiz_option"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:padding="14dp">
+                <TextView android:id="@+id/tvLetterLA" android:layout_width="36dp" android:layout_height="36dp" android:background="@drawable/bg_letter_badge" android:gravity="center" android:text="A" android:textColor="#374151" android:textSize="15sp" android:textStyle="bold" />
+                <TextView android:id="@+id/tvOptionLA" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="vocabulary" android:textColor="#111827" android:textSize="16sp" />
+                <TextView android:id="@+id/tvIconLA" android:layout_width="24dp" android:layout_height="24dp" android:gravity="center" android:text="" android:textSize="16sp" android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/optionLB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_quiz_option"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:padding="14dp">
+                <TextView android:id="@+id/tvLetterLB" android:layout_width="36dp" android:layout_height="36dp" android:background="@drawable/bg_letter_badge" android:gravity="center" android:text="B" android:textColor="#374151" android:textSize="15sp" android:textStyle="bold" />
+                <TextView android:id="@+id/tvOptionLB" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="grammar" android:textColor="#111827" android:textSize="16sp" />
+                <TextView android:id="@+id/tvIconLB" android:layout_width="24dp" android:layout_height="24dp" android:gravity="center" android:text="" android:textSize="16sp" android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/optionLC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_quiz_option"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:padding="14dp">
+                <TextView android:id="@+id/tvLetterLC" android:layout_width="36dp" android:layout_height="36dp" android:background="@drawable/bg_letter_badge" android:gravity="center" android:text="C" android:textColor="#374151" android:textSize="15sp" android:textStyle="bold" />
+                <TextView android:id="@+id/tvOptionLC" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="fluency" android:textColor="#111827" android:textSize="16sp" />
+                <TextView android:id="@+id/tvIconLC" android:layout_width="24dp" android:layout_height="24dp" android:gravity="center" android:text="" android:textSize="16sp" android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/optionLD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_quiz_option"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:padding="14dp">
+                <TextView android:id="@+id/tvLetterLD" android:layout_width="36dp" android:layout_height="36dp" android:background="@drawable/bg_letter_badge" android:gravity="center" android:text="D" android:textColor="#374151" android:textSize="15sp" android:textStyle="bold" />
+                <TextView android:id="@+id/tvOptionLD" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="reading" android:textColor="#111827" android:textSize="16sp" />
+                <TextView android:id="@+id/tvIconLD" android:layout_width="24dp" android:layout_height="24dp" android:gravity="center" android:text="" android:textSize="16sp" android:visibility="invisible" />
+            </LinearLayout>
+
+            <!-- Banner phản hồi -->
+            <LinearLayout
+                android:id="@+id/layoutListenFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_card"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:padding="14dp"
+                android:visibility="gone">
+                <TextView android:id="@+id/tvListenFeedbackIcon" android:layout_width="32dp" android:layout_height="32dp" android:gravity="center" android:text="✓" android:textSize="18sp" />
+                <TextView android:id="@+id/tvListenFeedbackText" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:text="Chính xác!" android:textColor="#111827" android:textSize="15sp" android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- ── BOTTOM BUTTONS ────────────────────────────────────── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/btnListenCheck"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_btn_disabled"
+            android:enabled="false"
+            android:text="KIỂM TRA"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnListenNext"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_primary_red"
+            android:text="CÂU TIẾP THEO ▶"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>
