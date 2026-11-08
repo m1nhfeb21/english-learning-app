@@ -14,14 +14,31 @@
         android:theme="@style/Theme.EnglishLearningSoftware">
 
         <activity android:name=".HomeActivity" android:exported="false" />
+
+        <!-- Bài tập Trắc Nghiệm -->
+        <activity android:name=".QuizActivity" android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Bài tập Điền Từ -->
+        <activity android:name=".FillBlankActivity" android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Bài tập Luyện Nghe -->
+        <activity android:name=".ListeningActivity" android:exported="false" />
+
+        <!-- Bài tập Luyện Viết -->
+        <activity android:name=".WritingActivity" android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Màn hình Kết Quả -->
+        <activity android:name=".ResultActivity" android:exported="false" />
+
         <activity android:name=".ScannerActivity" android:exported="false" />
         <activity android:name=".FlashcardActivity" android:exported="false" />
         <activity android:name=".ProfileActivity" android:exported="false" />
         <activity android:name=".EditProfileActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-
-
 
         <activity
             android:name=".MainActivity"
@@ -36,5 +53,4 @@
         </activity>
 
     </application>
-
 </manifest>

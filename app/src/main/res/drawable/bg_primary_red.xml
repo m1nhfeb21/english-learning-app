@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nút chính màu đỏ (Kiểm tra / Câu tiếp theo) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#DC2626" />
+    <corners android:radius="14dp" />
+</shape>

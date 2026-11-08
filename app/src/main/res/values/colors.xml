@@ -15,4 +15,16 @@
     <color name="profile_red_dark">#8F1D2C</color>
     <color name="profile_red_light">#FCE7EA</color>
     <color name="profile_green">#198754</color>
+
+    <!-- Quiz / Fill-Blank colors -->
+    <color name="quiz_bg">#F9FAFB</color>
+    <color name="quiz_primary">#DC2626</color>
+    <color name="quiz_correct">#16A34A</color>
+    <color name="quiz_correct_bg">#DCFCE7</color>
+    <color name="quiz_wrong_bg">#FEE2E2</color>
+    <color name="quiz_selected">#4F46E5</color>
+    <color name="quiz_selected_bg">#EFF6FF</color>
+    <color name="quiz_border">#E5E7EB</color>
+    <color name="quiz_timer_text">#92400E</color>
+    <color name="quiz_disabled">#D1D5DB</color>
 </resources>
