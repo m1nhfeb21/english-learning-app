@@ -32,7 +32,7 @@ public class AuthUiTest {
     public void previewOpensHomeAndReturnsToLoginWithoutBackend() {
         try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
             onView(withId(R.id.btnPreview)).perform(scrollTo(), click());
-            onView(withId(R.id.tvHomeStatus)).check(matches(withText(R.string.preview_status)));
+            onView(withId(R.id.tvWelcome)).check(matches(withText(R.string.preview_welcome)));
             onView(withId(R.id.btnLogout)).perform(scrollTo(), click());
             onView(withId(R.id.etLoginEmail)).check(matches(isDisplayed()));
         }

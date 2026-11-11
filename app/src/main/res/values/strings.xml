@@ -18,7 +18,7 @@
     <string name="backend_error">The server encountered an error.</string>
     <string name="login_http_error">The server returned HTTP error %1$d</string>
     <string name="register_http_error">Registration failed: HTTP %1$d</string>
-    <string name="preview_button">Preview the app (no server required)</string>
+    <string name="preview_button">Xem trước</string>
     <string name="home_title">English Learning</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="welcome_name">Hello %1$s!</string>

@@ -14,7 +14,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="wrap_content"
+            android:minHeight="250dp"
+            android:paddingBottom="18dp"
             android:gravity="center"
             android:orientation="vertical"
             android:background="@drawable/bg_profile_header">
@@ -30,16 +32,46 @@
                 android:textSize="15sp"
                 android:clickable="true"
                 android:focusable="true" />
-            <TextView
-                android:id="@+id/tvProfileAvatar"
+            <FrameLayout
+                android:id="@+id/profileAvatarContainer"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
+                android:background="@drawable/bg_avatar"
+                android:clipToOutline="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Đổi ảnh đại diện"
+                android:importantForAccessibility="yes">
+                <TextView
+                    android:id="@+id/tvProfileAvatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="N"
+                    android:textColor="@color/profile_red_dark"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:importantForAccessibility="no" />
+                <ImageView
+                    android:id="@+id/ivProfileAvatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    android:importantForAccessibility="no" />
+            </FrameLayout>
+            <TextView
+                android:id="@+id/btnChangeAvatar"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
                 android:gravity="center"
-                android:text="N"
-                android:textColor="@color/profile_red_dark"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:background="@drawable/bg_avatar" />
+                android:text="Đổi ảnh"
+                android:textColor="@android:color/white"
+                android:textSize="13sp"
+                android:clickable="true"
+                android:focusable="true" />
             <TextView
                 android:id="@+id/tvProfileName"
                 android:layout_width="wrap_content"

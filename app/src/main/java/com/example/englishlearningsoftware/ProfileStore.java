@@ -3,6 +3,7 @@ package com.example.englishlearningsoftware;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 
 import java.util.Locale;
 
@@ -14,6 +15,7 @@ public final class ProfileStore {
     private static final String NAME_KEY = "display_name";
     private static final String GOAL_KEY = "learning_goal";
     private static final String MINUTES_KEY = "daily_minutes";
+    private static final String AVATAR_KEY = "avatar_uri";
 
     private ProfileStore() {}
 
@@ -49,6 +51,20 @@ public final class ProfileStore {
 
     public static int getMinutes(Context context, Intent intent) {
         return forIntent(context, intent).getInt(MINUTES_KEY, 20);
+    }
+
+    public static Uri getAvatarUri(Context context, Intent intent) {
+        String value = forIntent(context, intent).getString(AVATAR_KEY, null);
+        if (value == null) return null;
+        Uri uri = Uri.parse(value);
+        return "content".equals(uri.getScheme()) ? uri : null;
+    }
+
+    public static void setAvatarUri(Context context, Intent intent, Uri uri) {
+        if (uri == null || !"content".equals(uri.getScheme())) {
+            throw new IllegalArgumentException("Avatar must be a content URI");
+        }
+        forIntent(context, intent).edit().putString(AVATAR_KEY, uri.toString()).apply();
     }
 
     public static void save(Context context, Intent intent, String name,

@@ -2,9 +2,14 @@ package com.example.englishlearningsoftware;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-/** Main navigation screen. Login/Register and the original Home design stay unchanged. */
+/** Main navigation screen and skill-filtered practice list. */
 public class HomeActivity extends AppCompatActivity {
     public static final String EXTRA_FIRST_NAME = "firstName";
     public static final String EXTRA_LAST_NAME  = "lastName";
@@ -22,6 +27,10 @@ public class HomeActivity extends AppCompatActivity {
 
     private TextView welcome;
     private boolean  preview;
+    private String selectedSkill = "";
+    private EditText exerciseSearch;
+    private LinearLayout exerciseList;
+    private Button[] skillFilters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,8 @@ public class HomeActivity extends AppCompatActivity {
             intent.putExtras(getIntent());
             startActivity(intent);
         });
+        findViewById(R.id.homeAvatarContainer).setOnClickListener(
+                view -> findViewById(R.id.btnOpenProfile).performClick());
 
         // ── Bộ thẻ & Camera ─────────────────────────────────────────────────
         findViewById(R.id.btnOpenFlashcards).setOnClickListener(
@@ -50,33 +61,7 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.btnOpenCamera).setOnClickListener(
                 view -> openIfInstalled("ScannerActivity"));
 
-        // ── Trắc Nghiệm ─────────────────────────────────────────────────────
-        View btnQuiz = findViewById(R.id.btnOpenQuiz);
-        if (btnQuiz != null) {
-            btnQuiz.setOnClickListener(view -> startActivity(
-                    new Intent(HomeActivity.this, QuizActivity.class).putExtras(getIntent())));
-        }
-
-        // ── Điền Từ ─────────────────────────────────────────────────────────
-        View btnFill = findViewById(R.id.btnOpenFillBlank);
-        if (btnFill != null) {
-            btnFill.setOnClickListener(view -> startActivity(
-                    new Intent(HomeActivity.this, FillBlankActivity.class).putExtras(getIntent())));
-        }
-
-        // ── Luyện Nghe ──────────────────────────────────────────────────────
-        View btnListen = findViewById(R.id.btnOpenListening);
-        if (btnListen != null) {
-            btnListen.setOnClickListener(view -> startActivity(
-                    new Intent(HomeActivity.this, ListeningActivity.class).putExtras(getIntent())));
-        }
-
-        // ── Luyện Viết ──────────────────────────────────────────────────────
-        View btnWrite = findViewById(R.id.btnOpenWriting);
-        if (btnWrite != null) {
-            btnWrite.setOnClickListener(view -> startActivity(
-                    new Intent(HomeActivity.this, WritingActivity.class).putExtras(getIntent())));
-        }
+        setupExercises(savedInstanceState);
 
         // ── Bài làm chung (dự phòng) ────────────────────────────────────────
         findViewById(R.id.btnOpenPractice).setOnClickListener(
@@ -106,12 +91,87 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        ProfileAvatar.bind(this, getIntent(), findViewById(R.id.ivHomeAvatar),
+                findViewById(R.id.tvHomeAvatar));
         if (!preview && welcome != null) {
             String name = ProfileStore.getName(this, getIntent());
             welcome.setText(name.trim().isEmpty()
                     ? getString(R.string.welcome_back)
                     : getString(R.string.welcome_name, name));
         }
+    }
+
+    private void setupExercises(Bundle savedInstanceState) {
+        exerciseList = findViewById(R.id.exerciseList);
+        exerciseSearch = findViewById(R.id.etExerciseSearch);
+        setupExercise(R.id.btnOpenQuiz, "Trắc nghiệm từ vựng", "Đọc", QuizActivity.class);
+        setupExercise(R.id.btnOpenListening, "Nghe và chọn từ", "Nghe", ListeningActivity.class);
+        setupExercise(R.id.btnOpenFillBlank, "Điền từ vào câu", "Đọc", FillBlankActivity.class);
+        setupExercise(R.id.btnOpenWriting, "Viết từ tiếng Anh", "Viết", WritingActivity.class);
+        skillFilters = new Button[]{findViewById(R.id.filterAll), findViewById(R.id.filterListening),
+                findViewById(R.id.filterSpeaking), findViewById(R.id.filterReading),
+                findViewById(R.id.filterWriting)};
+        if (savedInstanceState != null) {
+            selectedSkill = savedInstanceState.getString("exercise_skill", "");
+        }
+        for (Button filter : skillFilters) {
+            filter.setOnClickListener(view -> {
+                selectedSkill = filter == skillFilters[0] ? "" : filter.getText().toString();
+                filterExercises();
+            });
+        }
+        exerciseSearch.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterExercises();
+            }
+            @Override public void afterTextChanged(Editable text) {}
+        });
+        filterExercises();
+    }
+
+    private void setupExercise(int id, String title, String skill, Class<?> activityClass) {
+        View card = findViewById(id);
+        card.setTag(skill);
+        ((TextView) card.findViewById(R.id.exerciseTitle)).setText(title);
+        ((TextView) card.findViewById(R.id.exerciseSkill)).setText(skill);
+        View.OnClickListener start = view -> startActivity(
+                new Intent(this, activityClass).putExtras(getIntent()));
+        card.setOnClickListener(start);
+        card.setFocusable(true);
+        View button = card.findViewById(R.id.btnStartExercise);
+        button.setContentDescription("Bắt đầu: " + title);
+        button.setOnClickListener(start);
+    }
+
+    private void filterExercises() {
+        String query = exerciseSearch.getText().toString();
+        int count = 0;
+        for (int i = 0; i < exerciseList.getChildCount(); i++) {
+            View card = exerciseList.getChildAt(i);
+            String title = ((TextView) card.findViewById(R.id.exerciseTitle)).getText().toString();
+            boolean matches = ExerciseFilter.matches((String) card.getTag(), selectedSkill, title, query);
+            card.setVisibility(matches ? View.VISIBLE : View.GONE);
+            if (matches) count++;
+        }
+        for (Button filter : skillFilters) {
+            boolean selected = filter == skillFilters[0]
+                    ? selectedSkill.isEmpty() : selectedSkill.contentEquals(filter.getText());
+            filter.setSelected(selected);
+            filter.setBackgroundResource(selected ? R.drawable.bg_primary_red : R.drawable.bg_btn_outline);
+            filter.setTextColor(Color.parseColor(selected ? "#FFFFFF" : "#616873"));
+        }
+        TextView empty = findViewById(R.id.tvExerciseEmpty);
+        empty.setText(selectedSkill.equals("Nói")
+                ? "Chưa có bài luyện nói. Bạn có thể chọn kỹ năng khác."
+                : "Không tìm thấy bài tập phù hợp. Thử từ khóa hoặc kỹ năng khác.");
+        empty.setVisibility(count == 0 ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("exercise_skill", selectedSkill);
+        super.onSaveInstanceState(outState);
     }
 
     private void openIfInstalled(String... classNames) {

@@ -48,7 +48,6 @@ public class FlashcardActivity extends AppCompatActivity {
     private Button btnToggleAddForm;
 
     // Form thêm từ mới
-    private LinearLayout layoutAddForm;
     private EditText etNewWord;
     private EditText etNewType;
     private EditText etNewMeaning;
@@ -62,6 +61,10 @@ public class FlashcardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard);
+        androidx.core.view.WindowInsetsControllerCompat controller =
+                new androidx.core.view.WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
+        controller.setAppearanceLightStatusBars(true);
+        controller.setAppearanceLightNavigationBars(true);
 
         // Khởi tạo database
         dbHelper = new FlashcardDbHelper(this);
@@ -98,6 +101,9 @@ public class FlashcardActivity extends AppCompatActivity {
         // Xử lý khoảng cách thanh trạng thái hệ thống
         final View root = findViewById(R.id.flashcardRoot);
         final int padTop = root.getPaddingTop();
+        final int padBottom = root.getPaddingBottom();
+        final int padLeft = root.getPaddingLeft();
+        final int padRight = root.getPaddingRight();
         androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(root,
                 new androidx.core.view.OnApplyWindowInsetsListener() {
                     @Override
@@ -105,8 +111,10 @@ public class FlashcardActivity extends AppCompatActivity {
                             androidx.core.view.WindowInsetsCompat insets) {
                         androidx.core.graphics.Insets bars = insets.getInsets(
                                 androidx.core.view.WindowInsetsCompat.Type.systemBars());
-                        view.setPadding(root.getPaddingLeft(), padTop + bars.top,
-                                root.getPaddingRight(), bars.bottom);
+                        int keyboardBottom = insets.getInsets(
+                                androidx.core.view.WindowInsetsCompat.Type.ime()).bottom;
+                        view.setPadding(padLeft + bars.left, padTop + bars.top,
+                                padRight + bars.right, padBottom + Math.max(bars.bottom, keyboardBottom));
                         return insets;
                     }
                 });
@@ -128,7 +136,6 @@ public class FlashcardActivity extends AppCompatActivity {
         btnBackHome = findViewById(R.id.btnBackHome);
         btnToggleAddForm = findViewById(R.id.btnToggleAddForm);
 
-        layoutAddForm = findViewById(R.id.layoutAddForm);
         etNewWord = findViewById(R.id.etNewWord);
         etNewType = findViewById(R.id.etNewType);
         etNewMeaning = findViewById(R.id.etNewMeaning);
@@ -252,14 +259,7 @@ public class FlashcardActivity extends AppCompatActivity {
         btnToggleAddForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (layoutAddForm.getVisibility() == View.VISIBLE) {
-                    layoutAddForm.setVisibility(View.GONE);
-                    btnToggleAddForm.setText("+ Thêm từ");
-                } else {
-                    layoutAddForm.setVisibility(View.VISIBLE);
-                    btnToggleAddForm.setText("✕ Đóng form");
-                    etNewWord.requestFocus();
-                }
+                setAddFormVisible(findViewById(R.id.addFormScroll).getVisibility() != View.VISIBLE);
             }
         });
 
@@ -283,7 +283,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 long id = dbHelper.addFlashcard(newCard);
 
                 if (id > 0) {
-                    Toast.makeText(FlashcardActivity.this, "Đã lưu từ '" + word + "' vào Database!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlashcardActivity.this, "Đã lưu từ '" + word + "'", Toast.LENGTH_SHORT).show();
 
                     // Xóa trắng ô nhập sau khi lưu
                     etNewWord.setText("");
@@ -292,18 +292,32 @@ public class FlashcardActivity extends AppCompatActivity {
                     etNewExample.setText("");
 
                     // Đóng form nhập
-                    layoutAddForm.setVisibility(View.GONE);
-                    btnToggleAddForm.setText("+ Thêm từ");
+                    setAddFormVisible(false);
 
                     // Tải lại danh sách và xem từ vừa thêm
                     loadDataTuDatabase();
                     currentIndex = 0;
                     hienThiTheTo(currentIndex);
                 } else {
-                    Toast.makeText(FlashcardActivity.this, "Lỗi: Không thể lưu vào Database!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlashcardActivity.this, "Không thể lưu từ. Vui lòng thử lại.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private void setAddFormVisible(boolean visible) {
+        findViewById(R.id.addFormScroll).setVisibility(visible ? View.VISIBLE : View.GONE);
+        for (int id : new int[]{R.id.cardContainer, R.id.cardNavigation,
+                R.id.savedWordsHeader, R.id.lvFlashcards}) {
+            findViewById(id).setVisibility(visible ? View.GONE : View.VISIBLE);
+        }
+        btnToggleAddForm.setText(visible ? "Đóng" : "+ Thêm từ");
+        if (visible) {
+            etNewWord.requestFocus();
+        } else {
+            new androidx.core.view.WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView())
+                    .hide(androidx.core.view.WindowInsetsCompat.Type.ime());
+        }
     }
 
     // Bấm vào 1 dòng trong danh sách để xem trên thẻ to
@@ -327,7 +341,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 // Hộp thoại xác nhận xóa
                 new AlertDialog.Builder(FlashcardActivity.this)
                         .setTitle("Xóa từ vựng")
-                        .setMessage("Bạn có chắc muốn xóa từ '" + cardCanXoa.getWord() + "' khỏi Database không?")
+                        .setMessage("Bạn có chắc muốn xóa từ '" + cardCanXoa.getWord() + "' khỏi danh sách không?")
                         .setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

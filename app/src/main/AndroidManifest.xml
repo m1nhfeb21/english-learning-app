@@ -34,7 +34,8 @@
         <activity android:name=".ResultActivity" android:exported="false" />
 
         <activity android:name=".ScannerActivity" android:exported="false" />
-        <activity android:name=".FlashcardActivity" android:exported="false" />
+        <activity android:name=".FlashcardActivity" android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ProfileActivity" android:exported="false" />
         <activity android:name=".EditProfileActivity"
             android:exported="false"

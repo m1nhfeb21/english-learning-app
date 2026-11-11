@@ -1,53 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Layout hiển thị 1 dòng từ vựng trong ListView -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_flashcard_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="68dp"
     android:orientation="horizontal"
-    android:padding="12dp"
-    android:gravity="center_vertical">
-
-    <!-- Cột trái: từ tiếng Anh và loại từ -->
+    android:paddingStart="14dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="14dp"
+    android:paddingBottom="10dp">
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
-
-        <!-- Từ vựng tiếng Anh -->
         <TextView
             android:id="@+id/item_tv_word"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Vocabulary"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:textColor="#111827" />
-
-        <!-- Loại từ -->
+            android:textColor="#20252D"
+            android:textSize="16sp"
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/item_tv_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="Noun"
-            android:textSize="13sp"
-            android:textColor="#4F46E5"
+            android:text="(Noun)"
+            android:textColor="#B5162B"
+            android:textSize="12sp"
             android:textStyle="italic" />
     </LinearLayout>
-
-    <!-- Cột phải: nghĩa tiếng Việt -->
     <TextView
         android:id="@+id/item_tv_meaning"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:ellipsize="end"
         android:gravity="end"
-        android:text="Từ vựng"
-        android:textSize="15sp"
-        android:textColor="#4B5563"
         android:maxLines="2"
-        android:ellipsize="end" />
-
+        android:text="Từ vựng"
+        android:textColor="#626975"
+        android:textSize="13sp" />
 </LinearLayout>
