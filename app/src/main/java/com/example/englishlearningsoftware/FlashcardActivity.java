@@ -18,22 +18,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Màn hình học flashcard và quản lý từ vựng
- */
 public class FlashcardActivity extends AppCompatActivity {
 
-    // Database helper thao tác với SQLite
     private FlashcardDbHelper dbHelper;
-    // Danh sách flashcard lấy từ database
+
     private List<Flashcard> flashcardList = new ArrayList<>();
-    // Adapter đổ dữ liệu lên ListView
+
     private FlashcardAdapter adapter;
 
-    // Vị trí thẻ đang hiển thị ở khung trên
     private int currentIndex = 0;
 
-    // Các thành phần giao diện
     private FrameLayout cardContainer;
     private LinearLayout layoutCardFront;
     private LinearLayout layoutCardBack;
@@ -47,14 +41,12 @@ public class FlashcardActivity extends AppCompatActivity {
     private Button btnBackHome;
     private Button btnToggleAddForm;
 
-    // Form thêm từ mới
     private EditText etNewWord;
     private EditText etNewType;
     private EditText etNewMeaning;
     private EditText etNewExample;
     private Button btnSaveWord;
 
-    // ListView hiển thị danh sách từ
     private ListView lvFlashcards;
 
     @Override
@@ -66,31 +58,22 @@ public class FlashcardActivity extends AppCompatActivity {
         controller.setAppearanceLightStatusBars(true);
         controller.setAppearanceLightNavigationBars(true);
 
-        // Khởi tạo database
         dbHelper = new FlashcardDbHelper(this);
 
-        // Ánh xạ các view
         anhXaView();
 
-        // Lấy dữ liệu từ database và đưa lên ListView
         loadDataTuDatabase();
 
-        // Bấm vào thẻ để lật mặt trước và mặt sau
         xuLyLatThe();
 
-        // Chuyển qua lại giữa các thẻ từ
         xuLyChuyenThe();
 
-        // Bật tắt form và lưu từ mới
         xuLyFormThemTu();
 
-        // Bấm vào 1 dòng trên danh sách để xem chi tiết
         xuLyClickListView();
 
-        // Nhấn giữ lâu để xóa từ khỏi database
         xuLyLongClickXoaTu();
 
-        // Nút quay về màn hình trước
         btnBackHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +81,6 @@ public class FlashcardActivity extends AppCompatActivity {
             }
         });
 
-        // Xử lý khoảng cách thanh trạng thái hệ thống
         final View root = findViewById(R.id.flashcardRoot);
         final int padTop = root.getPaddingTop();
         final int padBottom = root.getPaddingBottom();
@@ -121,7 +103,6 @@ public class FlashcardActivity extends AppCompatActivity {
         androidx.core.view.ViewCompat.requestApplyInsets(root);
     }
 
-    // Ánh xạ các view trên giao diện
     private void anhXaView() {
         cardContainer = findViewById(R.id.cardContainer);
         layoutCardFront = findViewById(R.id.layoutCardFront);
@@ -145,7 +126,6 @@ public class FlashcardActivity extends AppCompatActivity {
         lvFlashcards = findViewById(R.id.lvFlashcards);
     }
 
-    // Đọc danh sách từ trong database và cập nhật ListView
     private void loadDataTuDatabase() {
         flashcardList.clear();
         flashcardList.addAll(dbHelper.getAllFlashcards());
@@ -157,7 +137,6 @@ public class FlashcardActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
 
-        // Hiển thị từ đầu tiên lên thẻ nếu danh sách có từ
         if (!flashcardList.isEmpty()) {
             if (currentIndex >= flashcardList.size()) {
                 currentIndex = 0;
@@ -172,7 +151,6 @@ public class FlashcardActivity extends AppCompatActivity {
         }
     }
 
-    // Hiển thị thông tin từ vựng lên thẻ to
     private void hienThiTheTo(int index) {
         if (index < 0 || index >= flashcardList.size()) return;
 
@@ -197,12 +175,10 @@ public class FlashcardActivity extends AppCompatActivity {
 
         tvCardCounter.setText("Thẻ " + (index + 1) + " / " + flashcardList.size());
 
-        // Mặc định luôn hiện mặt trước khi đổi từ mới
         layoutCardFront.setVisibility(View.VISIBLE);
         layoutCardBack.setVisibility(View.GONE);
     }
 
-    // Đổi hiển thị giữa mặt trước và mặt sau khi chạm vào thẻ
     private void xuLyLatThe() {
         cardContainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,9 +196,8 @@ public class FlashcardActivity extends AppCompatActivity {
         });
     }
 
-    // Chuyển đổi thẻ lùi về trước hoặc tiến tới sau
     private void xuLyChuyenThe() {
-        // Nút lùi về từ trước
+
         btnPrevCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,7 +212,6 @@ public class FlashcardActivity extends AppCompatActivity {
             }
         });
 
-        // Nút tiến tới từ tiếp theo
         btnNextCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -253,9 +227,8 @@ public class FlashcardActivity extends AppCompatActivity {
         });
     }
 
-    // Đóng mở form và lưu từ mới vào database
     private void xuLyFormThemTu() {
-        // Đóng hoặc mở form nhập
+
         btnToggleAddForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,7 +236,6 @@ public class FlashcardActivity extends AppCompatActivity {
             }
         });
 
-        // Lưu thông tin từ mới
         btnSaveWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -272,29 +244,24 @@ public class FlashcardActivity extends AppCompatActivity {
                 String meaning = etNewMeaning.getText().toString().trim();
                 String example = etNewExample.getText().toString().trim();
 
-                // Kiểm tra các trường bắt buộc
                 if (word.isEmpty() || meaning.isEmpty()) {
                     Toast.makeText(FlashcardActivity.this, "Vui lòng nhập ít nhất Từ vựng và Nghĩa!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // Tạo đối tượng và lưu vào database
                 Flashcard newCard = new Flashcard(word, type, meaning, example);
                 long id = dbHelper.addFlashcard(newCard);
 
                 if (id > 0) {
                     Toast.makeText(FlashcardActivity.this, "Đã lưu từ '" + word + "'", Toast.LENGTH_SHORT).show();
 
-                    // Xóa trắng ô nhập sau khi lưu
                     etNewWord.setText("");
                     etNewType.setText("");
                     etNewMeaning.setText("");
                     etNewExample.setText("");
 
-                    // Đóng form nhập
                     setAddFormVisible(false);
 
-                    // Tải lại danh sách và xem từ vừa thêm
                     loadDataTuDatabase();
                     currentIndex = 0;
                     hienThiTheTo(currentIndex);
@@ -306,6 +273,7 @@ public class FlashcardActivity extends AppCompatActivity {
     }
 
     private void setAddFormVisible(boolean visible) {
+        // Give the add form the full available height while the keyboard is open.
         findViewById(R.id.addFormScroll).setVisibility(visible ? View.VISIBLE : View.GONE);
         for (int id : new int[]{R.id.cardContainer, R.id.cardNavigation,
                 R.id.savedWordsHeader, R.id.lvFlashcards}) {
@@ -320,7 +288,6 @@ public class FlashcardActivity extends AppCompatActivity {
         }
     }
 
-    // Bấm vào 1 dòng trong danh sách để xem trên thẻ to
     private void xuLyClickListView() {
         lvFlashcards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -331,21 +298,19 @@ public class FlashcardActivity extends AppCompatActivity {
         });
     }
 
-    // Nhấn giữ lâu vào 1 dòng để xóa từ khỏi database
     private void xuLyLongClickXoaTu() {
         lvFlashcards.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 final Flashcard cardCanXoa = flashcardList.get(position);
 
-                // Hộp thoại xác nhận xóa
                 new AlertDialog.Builder(FlashcardActivity.this)
                         .setTitle("Xóa từ vựng")
                         .setMessage("Bạn có chắc muốn xóa từ '" + cardCanXoa.getWord() + "' khỏi danh sách không?")
                         .setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // Xóa khỏi database
+
                                 boolean daXoa = dbHelper.deleteFlashcard(cardCanXoa.getId());
                                 if (daXoa) {
                                     Toast.makeText(FlashcardActivity.this, "Đã xóa từ '" + cardCanXoa.getWord() + "'", Toast.LENGTH_SHORT).show();

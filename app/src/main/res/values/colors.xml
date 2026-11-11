@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Default colors -->
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Login screen colors -->
     <color name="bg_dark">#111827</color>
     <color name="text_red">#DC2626</color>
     <color name="btn_blue">#4F46E5</color>
@@ -16,7 +15,6 @@
     <color name="profile_red_light">#FCE7EA</color>
     <color name="profile_green">#198754</color>
 
-    <!-- Quiz / Fill-Blank colors -->
     <color name="quiz_bg">#F9FAFB</color>
     <color name="quiz_primary">#DC2626</color>
     <color name="quiz_correct">#16A34A</color>

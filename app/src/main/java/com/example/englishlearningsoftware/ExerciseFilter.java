@@ -12,6 +12,7 @@ final class ExerciseFilter {
     }
 
     private static String normalize(String text) {
+        // Remove accents so Vietnamese searches work without diacritics.
         return Normalizer.normalize(text, Normalizer.Form.NFD)
                 .replaceAll("\\p{M}+", "")
                 .toLowerCase(Locale.ROOT).replace('đ', 'd').trim();

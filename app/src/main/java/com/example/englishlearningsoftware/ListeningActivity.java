@@ -14,17 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
-/**
- * Màn hình Luyện Nghe (Listening Exercise).
- * Sử dụng TextToSpeech để phát âm từ tiếng Anh.
- * Người học chọn từ đúng trong 4 lựa chọn.
- */
 public class ListeningActivity extends AppCompatActivity {
 
-    // ── DỮ LIỆU MẪU ─────────────────────────────────────────────────────────
-    /**
-     * Mỗi câu: {từ cần nghe, optionA, optionB, optionC, optionD, correctIndex(0-3), câu ví dụ}
-     */
     private static final String[][] QUESTIONS = {
         {"vocabulary",    "vocabulary",    "documentary",  "dictionary",   "laboratory",   "0", "She has a large vocabulary."},
         {"pronunciation", "preparation",   "pronunciation","publication",  "presentation", "1", "Good pronunciation is key."},
@@ -33,13 +24,11 @@ public class ListeningActivity extends AppCompatActivity {
         {"bilingual",     "binocular",     "bilateral",    "biological",   "bilingual",    "3", "She is bilingual in English and French."}
     };
 
-    // ── TRẠNG THÁI ───────────────────────────────────────────────────────────
     private int     currentIndex   = 0;
     private int     selectedOption = -1;
     private boolean answered       = false;
     private int     score          = 0;
 
-    // Lưu kết quả để truyền sang ResultActivity
     private final String[] userAnswers    = new String[QUESTIONS.length];
     private final String[] correctAnswers = new String[QUESTIONS.length];
     private final String[] questionLabels = new String[QUESTIONS.length];
@@ -47,7 +36,6 @@ public class ListeningActivity extends AppCompatActivity {
     private TextToSpeech tts;
     private boolean      ttsReady = false;
 
-    // ── VIEW REFERENCES ───────────────────────────────────────────────────────
     private TextView   tvCounter, tvScore;
     private ProgressBar progressBar;
 
@@ -61,7 +49,6 @@ public class ListeningActivity extends AppCompatActivity {
     private TextView     tvFeedbackIcon, tvFeedbackText;
     private Button       btnCheck, btnNext;
 
-    // ── LIFECYCLE ─────────────────────────────────────────────────────────────
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +76,6 @@ public class ListeningActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    // ── TTS ───────────────────────────────────────────────────────────────────
     private void initTts() {
         tts = new TextToSpeech(this, status -> {
             if (status == TextToSpeech.SUCCESS) {
@@ -106,7 +92,6 @@ public class ListeningActivity extends AppCompatActivity {
         }
     }
 
-    // ── BIND VIEWS ────────────────────────────────────────────────────────────
     private void bindViews() {
         tvCounter    = findViewById(R.id.tvListenCounter);
         tvScore      = findViewById(R.id.tvListenScore);
@@ -147,7 +132,6 @@ public class ListeningActivity extends AppCompatActivity {
         btnNext         = findViewById(R.id.btnListenNext);
     }
 
-    // ── OPTION CLICK ──────────────────────────────────────────────────────────
     private void setupOptionClickListeners() {
         for (int i = 0; i < 4; i++) {
             final int idx = i;
@@ -174,7 +158,6 @@ public class ListeningActivity extends AppCompatActivity {
         btnCheck.setBackground(getDrawable(R.drawable.bg_primary_red));
     }
 
-    // ── TẢI CÂU HỎI ──────────────────────────────────────────────────────────
     private void loadQuestion(int index) {
         answered       = false;
         selectedOption = -1;
@@ -184,11 +167,9 @@ public class ListeningActivity extends AppCompatActivity {
         tvCounter.setText((index + 1) + " / " + total);
         progressBar.setProgress((int) (((index + 1) / (float) total) * 100));
 
-        // Ghi nhãn câu hỏi để hiển thị kết quả
         questionLabels[index] = "Nghe và chọn: \"" + q[0] + "\"";
         correctAnswers[index] = q[0];
 
-        // Cài 4 lựa chọn
         String[] labels = {"A", "B", "C", "D"};
         for (int i = 0; i < 4; i++) {
             tvLetters[i].setText(labels[i]);
@@ -209,11 +190,9 @@ public class ListeningActivity extends AppCompatActivity {
         btnCheck.setVisibility(View.VISIBLE);
         btnNext.setVisibility(View.GONE);
 
-        // Tự động phát từ sau 600ms
         btnPlayAudio.postDelayed(this::playCurrentWord, 600);
     }
 
-    // ── KIỂM TRA ─────────────────────────────────────────────────────────────
     private void checkAnswer() {
         if (answered || selectedOption < 0) return;
         answered = true;
@@ -222,10 +201,8 @@ public class ListeningActivity extends AppCompatActivity {
         boolean isCorrect = (selectedOption == correctIdx);
         if (isCorrect) score++;
 
-        // Lưu đáp án người dùng
         userAnswers[currentIndex] = QUESTIONS[currentIndex][selectedOption + 1];
 
-        // Màu đúng/sai
         for (int i = 0; i < 4; i++) {
             optionLayouts[i].setEnabled(false);
             tvIcons[i].setVisibility(View.VISIBLE);
@@ -248,14 +225,11 @@ public class ListeningActivity extends AppCompatActivity {
             }
         }
 
-        // Hiện từ vừa nghe
         tvRevealWord.setText(QUESTIONS[currentIndex][0]);
         tvRevealWord.setVisibility(View.VISIBLE);
 
-        // Cập nhật điểm
         tvScore.setText(score + " điểm");
 
-        // Banner phản hồi
         layoutFeedback.setVisibility(View.VISIBLE);
         if (isCorrect) {
             layoutFeedback.setBackgroundColor(Color.parseColor("#DCFCE7"));
@@ -275,7 +249,6 @@ public class ListeningActivity extends AppCompatActivity {
         btnNext.setText(isLast ? "XEM KẾT QUẢ 🏆" : "CÂU TIẾP THEO ▶");
     }
 
-    // ── CÂU TIẾP THEO / KẾT QUẢ ──────────────────────────────────────────────
     private void nextQuestion() {
         if (currentIndex >= QUESTIONS.length - 1) {
             launchResult();

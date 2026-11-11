@@ -52,7 +52,6 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(editIntent);
         });
 
-        // Keep the top header below the status bar without altering the original UI.
         View root = findViewById(R.id.profileRoot);
         final int topPadding = root.getPaddingTop();
         final int bottomPadding = root.getPaddingBottom();

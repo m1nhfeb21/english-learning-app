@@ -18,7 +18,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-/** Main navigation screen and skill-filtered practice list. */
 public class HomeActivity extends AppCompatActivity {
     public static final String EXTRA_FIRST_NAME = "firstName";
     public static final String EXTRA_LAST_NAME  = "lastName";
@@ -46,7 +45,6 @@ public class HomeActivity extends AppCompatActivity {
             btnLogout.setText(R.string.back_to_login);
         }
 
-        // ── Hồ sơ ───────────────────────────────────────────────────────────
         findViewById(R.id.btnOpenProfile).setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
             intent.putExtras(getIntent());
@@ -55,7 +53,6 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.homeAvatarContainer).setOnClickListener(
                 view -> findViewById(R.id.btnOpenProfile).performClick());
 
-        // ── Bộ thẻ & Camera ─────────────────────────────────────────────────
         findViewById(R.id.btnOpenFlashcards).setOnClickListener(
                 view -> openIfInstalled("FlashcardActivity"));
         findViewById(R.id.btnOpenCamera).setOnClickListener(
@@ -63,11 +60,9 @@ public class HomeActivity extends AppCompatActivity {
 
         setupExercises(savedInstanceState);
 
-        // ── Bài làm chung (dự phòng) ────────────────────────────────────────
         findViewById(R.id.btnOpenPractice).setOnClickListener(
                 view -> openIfInstalled("QuizActivity", "PracticeActivity", "ExerciseActivity"));
 
-        // ── Đăng xuất ───────────────────────────────────────────────────────
         btnLogout.setOnClickListener(view -> {
             if (!preview) {
                 Intent intent = new Intent(HomeActivity.this, MainActivity.class);
@@ -102,6 +97,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setupExercises(Bundle savedInstanceState) {
+        // Keep the filter list aligned with the implemented exercise screens.
         exerciseList = findViewById(R.id.exerciseList);
         exerciseSearch = findViewById(R.id.etExerciseSearch);
         setupExercise(R.id.btnOpenQuiz, "Trắc nghiệm từ vựng", "Đọc", QuizActivity.class);
@@ -183,7 +179,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 return;
             } catch (ClassNotFoundException | ActivityNotFoundException ignored) {
-                // The corresponding teammate's feature may not have been merged yet.
+
             }
         }
         Toast.makeText(this, R.string.home_feature_pending, Toast.LENGTH_SHORT).show();

@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/** Camera preview with on-device English object labels. */
 public class ScannerActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 100;
 

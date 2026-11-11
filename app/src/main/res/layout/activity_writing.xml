@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Giao diện Luyện Viết (Writing Exercise) -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/writingRoot"
     android:layout_width="match_parent"
@@ -7,7 +7,6 @@
     android:background="#F9FAFB"
     android:orientation="vertical">
 
-    <!-- ── HEADER ─────────────────────────────────────────────── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -54,7 +53,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- ── PROGRESS BAR ──────────────────────────────────────── -->
     <ProgressBar
         android:id="@+id/writeProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -65,7 +63,6 @@
         android:progressBackgroundTint="#E5E7EB"
         android:progressTint="#DC2626" />
 
-    <!-- ── SCROLL CONTENT ────────────────────────────────────── -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -79,7 +76,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Tag + điểm -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,7 +113,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- ── KHUNG CÂU HỎI ──────────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,7 +131,6 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="16dp" />
 
-                <!-- Nghĩa tiếng Việt -->
                 <TextView
                     android:id="@+id/tvWriteMeaning"
                     android:layout_width="match_parent"
@@ -148,7 +142,6 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="8dp" />
 
-                <!-- Loại từ -->
                 <TextView
                     android:id="@+id/tvWritePartOfSpeech"
                     android:layout_width="wrap_content"
@@ -164,7 +157,6 @@
                     android:textColor="#FFFFFF"
                     android:textSize="12sp" />
 
-                <!-- Ví dụ -->
                 <TextView
                     android:id="@+id/tvWriteExample"
                     android:layout_width="match_parent"
@@ -177,7 +169,6 @@
                     android:textStyle="italic" />
             </LinearLayout>
 
-            <!-- ── KHU VỰC NHẬP ────────────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -196,7 +187,6 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp" />
 
-                <!-- EditText nhập từ -->
                 <EditText
                     android:id="@+id/etWriteAnswer"
                     android:layout_width="match_parent"
@@ -214,7 +204,6 @@
                     android:imeOptions="actionDone"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Gợi ý chữ cái đầu -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -255,7 +244,6 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <!-- Phản hồi sau kiểm tra -->
                 <LinearLayout
                     android:id="@+id/layoutWriteFeedback"
                     android:layout_width="match_parent"
@@ -272,7 +260,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- ── BOTTOM BUTTONS ────────────────────────────────────── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

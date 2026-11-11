@@ -11,10 +11,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-/**
- * Màn hình Điền Từ (Fill in the Blank).
- * Hiển thị câu có chỗ trống, kho từ để chọn, kiểm tra và chuyển sang ResultActivity.
- */
 public class FillBlankActivity extends AppCompatActivity {
 
     private static final String[][] QUESTIONS = {
@@ -55,7 +51,6 @@ public class FillBlankActivity extends AppCompatActivity {
         }
     };
 
-    // ── TRẠNG THÁI ───────────────────────────────────────────────────────────
     private int     currentIndex    = 0;
     private String  selectedWord    = null;
     private boolean answered        = false;
@@ -66,7 +61,6 @@ public class FillBlankActivity extends AppCompatActivity {
     private final String[] correctAnswers = new String[QUESTIONS.length];
     private final String[] questionLabels = new String[QUESTIONS.length];
 
-    // ── VIEW REFERENCES ───────────────────────────────────────────────────────
     private TextView    tvCounter, tvScore, tvHint;
     private TextView    tvSentenceBefore, tvBlankSlot, tvSentenceAfter;
     private ProgressBar progressBar;
@@ -76,7 +70,6 @@ public class FillBlankActivity extends AppCompatActivity {
     private TextView    tvFeedbackIcon, tvFeedbackText;
     private Button      btnCheck, btnNext;
 
-    // ── LIFECYCLE ─────────────────────────────────────────────────────────────
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +86,6 @@ public class FillBlankActivity extends AppCompatActivity {
         loadQuestion(currentIndex);
     }
 
-    // ── BIND VIEWS ────────────────────────────────────────────────────────────
     private void bindViews() {
         tvCounter        = (TextView) findViewById(R.id.tvFillCounter);
         tvScore          = (TextView) findViewById(R.id.tvFillScore);
@@ -121,7 +113,6 @@ public class FillBlankActivity extends AppCompatActivity {
         btnNext         = (Button) findViewById(R.id.btnFillNext);
     }
 
-    // ── CHIP CLICK ────────────────────────────────────────────────────────────
     private void setupChipListeners() {
         for (int i = 0; i < chipViews.length; i++) {
             final int idx = i;
@@ -170,7 +161,6 @@ public class FillBlankActivity extends AppCompatActivity {
         btnCheck.setBackground(getDrawable(R.drawable.bg_btn_disabled));
     }
 
-    // ── TẢI CÂU HỎI ──────────────────────────────────────────────────────────
     private void loadQuestion(int index) {
         answered        = false;
         selectedWord    = null;
@@ -211,7 +201,6 @@ public class FillBlankActivity extends AppCompatActivity {
         btnNext.setVisibility(View.GONE);
     }
 
-    // ── KIỂM TRA ─────────────────────────────────────────────────────────────
     private void checkAnswer() {
         if (answered || selectedWord == null) return;
         answered = true;
@@ -261,7 +250,6 @@ public class FillBlankActivity extends AppCompatActivity {
         btnNext.setText(isLast ? "XEM KẾT QUẢ 🏆" : "CÂU TIẾP THEO ▶");
     }
 
-    // ── CÂU TIẾP THEO / KẾT QUẢ ─────────────────────────────────────────────
     private void nextQuestion() {
         if (currentIndex >= QUESTIONS.length - 1) {
             launchResult();

@@ -11,14 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-/**
- * Màn hình Kết Quả (Result Screen).
- * Nhận dữ liệu từ bất kỳ màn hình luyện tập nào (Quiz, FillBlank, Listening, Writing)
- * và hiển thị: điểm %, sao đánh giá, và chi tiết từng câu đúng/sai.
- */
 public class ResultActivity extends AppCompatActivity {
 
-    // ── EXTRA KEYS ────────────────────────────────────────────────────────────
     public static final String EXTRA_TYPE      = "result_type";
     public static final String EXTRA_SCORE     = "result_score";
     public static final String EXTRA_TOTAL     = "result_total";
@@ -26,13 +20,11 @@ public class ResultActivity extends AppCompatActivity {
     public static final String EXTRA_USER_ANS  = "result_user_answers";
     public static final String EXTRA_CORRECT   = "result_correct_answers";
 
-    // ── LIFECYCLE ─────────────────────────────────────────────────────────────
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        // Lấy dữ liệu từ Intent
         Intent in      = getIntent();
         String type    = in.getStringExtra(EXTRA_TYPE);
         int score      = in.getIntExtra(EXTRA_SCORE, 0);
@@ -48,10 +40,8 @@ public class ResultActivity extends AppCompatActivity {
 
         renderResult(type, score, total, questions, userAns, correct);
 
-        // Nút quay lại
         findViewById(R.id.btnResultBack).setOnClickListener(v -> finish());
 
-        // Nút về Home
         final String[] finalQuestions = questions;
         final String[] finalUserAns   = userAns;
         final String[] finalCorrect   = correct;
@@ -66,7 +56,6 @@ public class ResultActivity extends AppCompatActivity {
             finish();
         });
 
-        // Nút làm lại → quay lại Activity tương ứng
         Button btnRetry = findViewById(R.id.btnResultRetry);
         btnRetry.setOnClickListener(v -> {
             Class<?> target = resolveActivityClass(finalType);
@@ -77,16 +66,13 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
-    // ── RENDER ────────────────────────────────────────────────────────────────
     private void renderResult(String type, int score, int total,
                               String[] questions, String[] userAns, String[] correct) {
         int pct  = total > 0 ? (int) ((score / (float) total) * 100) : 0;
         int wrong = total - score;
 
-        // Loại bài
         ((TextView) findViewById(R.id.tvResultType)).setText(type);
 
-        // Phần trăm + phân số
         TextView tvPct      = findViewById(R.id.tvResultPercent);
         TextView tvFraction = findViewById(R.id.tvResultFraction);
         View     circle     = findViewById(R.id.resultCircle);
@@ -94,7 +80,6 @@ public class ResultActivity extends AppCompatActivity {
         tvPct.setText(pct + "%");
         tvFraction.setText(score + " / " + total);
 
-        // Màu vòng tròn theo % điểm
         if (pct >= 80) {
             circle.setBackground(getDrawable(R.drawable.bg_result_circle_good));
             tvPct.setTextColor(Color.parseColor("#16A34A"));
@@ -106,14 +91,12 @@ public class ResultActivity extends AppCompatActivity {
             tvPct.setTextColor(Color.parseColor("#DC2626"));
         }
 
-        // Sao
         TextView tvStars = findViewById(R.id.tvResultStars);
         int stars = pct >= 90 ? 5 : pct >= 75 ? 4 : pct >= 60 ? 3 : pct >= 40 ? 2 : 1;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 5; i++) sb.append(i < stars ? "⭐" : "☆");
         tvStars.setText(sb.toString());
 
-        // Thông điệp
         TextView tvMsg = findViewById(R.id.tvResultMessage);
         if (pct >= 90)      tvMsg.setText("Xuất sắc! Bạn đã thành thạo! 🏆");
         else if (pct >= 75) tvMsg.setText("Rất tốt! Tiếp tục phát huy! 💪");
@@ -121,11 +104,9 @@ public class ResultActivity extends AppCompatActivity {
         else if (pct >= 40) tvMsg.setText("Cần luyện thêm nhiều hơn! 📚");
         else                tvMsg.setText("Hãy ôn lại từ vựng và thử lại! 🔄");
 
-        // Thống kê đúng / sai
         ((TextView) findViewById(R.id.tvResultCorrect)).setText(score + " câu đúng");
         ((TextView) findViewById(R.id.tvResultWrong)).setText(wrong + " câu sai");
 
-        // Chi tiết từng câu
         LinearLayout detailContainer = findViewById(R.id.layoutResultDetails);
         detailContainer.removeAllViews();
 
@@ -135,7 +116,6 @@ public class ResultActivity extends AppCompatActivity {
             String corrA   = (i < correct.length  && correct[i] != null)  ? correct[i]  : "?";
             boolean ok     = corrA.equalsIgnoreCase(userA);
 
-            // Hàng kết quả
             LinearLayout row = new LinearLayout(this);
             row.setOrientation(LinearLayout.HORIZONTAL);
             row.setGravity(Gravity.CENTER_VERTICAL);
@@ -152,7 +132,6 @@ public class ResultActivity extends AppCompatActivity {
             rowLp.bottomMargin = dp(8);
             row.setLayoutParams(rowLp);
 
-            // Số thứ tự
             TextView tvNum = new TextView(this);
             tvNum.setText((i + 1) + ".");
             tvNum.setTextColor(ok ? Color.parseColor("#16A34A") : Color.parseColor("#DC2626"));
@@ -161,7 +140,6 @@ public class ResultActivity extends AppCompatActivity {
             LinearLayout.LayoutParams numLp = new LinearLayout.LayoutParams(dp(28), LinearLayout.LayoutParams.WRAP_CONTENT);
             tvNum.setLayoutParams(numLp);
 
-            // Nội dung (câu hỏi + đáp án)
             LinearLayout col = new LinearLayout(this);
             col.setOrientation(LinearLayout.VERTICAL);
             col.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
@@ -185,7 +163,6 @@ public class ResultActivity extends AppCompatActivity {
             col.addView(tvQ);
             col.addView(tvAns);
 
-            // Icon đúng/sai
             TextView tvIcon = new TextView(this);
             tvIcon.setText(ok ? "✓" : "✗");
             tvIcon.setTextColor(ok ? Color.parseColor("#16A34A") : Color.parseColor("#DC2626"));
@@ -201,12 +178,10 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
 
-    // ── HELPERS ───────────────────────────────────────────────────────────────
     private int dp(int dp) {
         return (int) (dp * getResources().getDisplayMetrics().density);
     }
 
-    /** Trả về Activity cần mở khi người dùng nhấn "Làm lại" */
     private Class<?> resolveActivityClass(String type) {
         switch (type) {
             case "Luyện Nghe": return ListeningActivity.class;

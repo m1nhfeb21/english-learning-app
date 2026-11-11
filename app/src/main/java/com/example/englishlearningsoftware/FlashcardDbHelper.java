@@ -9,16 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Quản lý database SQLite lưu từ vựng cục bộ trong máy
- */
 public class FlashcardDbHelper extends SQLiteOpenHelper {
 
-    // Tên file database và phiên bản
     private static final String DATABASE_NAME = "flashcards.db";
     private static final int DATABASE_VERSION = 1;
 
-    // Tên bảng và các cột
     public static final String TABLE_FLASHCARDS = "flashcards";
     public static final String KEY_ID = "_id";
     public static final String KEY_WORD = "word";
@@ -30,7 +25,6 @@ public class FlashcardDbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    // Tạo bảng flashcards khi mở database lần đầu
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_FLASHCARDS + " ("
@@ -43,7 +37,6 @@ public class FlashcardDbHelper extends SQLiteOpenHelper {
 
         db.execSQL(CREATE_TABLE);
 
-        // Chèn sẵn dữ liệu ban đầu vào database
         chenTuBanDau(db, "Vocabulary", "Noun", "Từ vựng", "Expanding your vocabulary is essential for learning English.");
         chenTuBanDau(db, "Resilience", "Noun", "Sự kiên cường, khả năng phục hồi", "She showed great resilience in overcoming challenges.");
         chenTuBanDau(db, "Diligent", "Adjective", "Chăm chỉ, siêng năng", "Diligent students usually achieve good results.");
@@ -51,7 +44,6 @@ public class FlashcardDbHelper extends SQLiteOpenHelper {
         chenTuBanDau(db, "Ponder", "Verb", "Suy ngẫm, trầm ngâm", "Take time to ponder before answering difficult questions.");
     }
 
-    // Chèn 1 dòng dữ liệu vào database
     private void chenTuBanDau(SQLiteDatabase db, String word, String type, String meaning, String example) {
         ContentValues values = new ContentValues();
         values.put(KEY_WORD, word);
@@ -61,14 +53,12 @@ public class FlashcardDbHelper extends SQLiteOpenHelper {
         db.insert(TABLE_FLASHCARDS, null, values);
     }
 
-    // Xóa bảng cũ và tạo lại khi nâng version database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FLASHCARDS);
         onCreate(db);
     }
 
-    // Thêm từ vựng mới vào database
     public long addFlashcard(Flashcard card) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -83,7 +73,6 @@ public class FlashcardDbHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    // Lấy toàn bộ danh sách từ vựng trong database
     public List<Flashcard> getAllFlashcards() {
         List<Flashcard> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -91,7 +80,6 @@ public class FlashcardDbHelper extends SQLiteOpenHelper {
         String selectQuery = "SELECT * FROM " + TABLE_FLASHCARDS + " ORDER BY " + KEY_ID + " DESC";
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // Duyệt từng dòng bằng cursor để lấy dữ liệu
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 int idIndex = cursor.getColumnIndex(KEY_ID);
@@ -116,7 +104,6 @@ public class FlashcardDbHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    // Xóa từ vựng khỏi database theo id
     public boolean deleteFlashcard(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         int rowsDeleted = db.delete(TABLE_FLASHCARDS, KEY_ID + " = ?", new String[]{String.valueOf(id)});

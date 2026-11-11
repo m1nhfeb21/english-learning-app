@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Giao diện Trắc Nghiệm (Multiple Choice Quiz) -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/quizRoot"
     android:layout_width="match_parent"
@@ -7,7 +7,6 @@
     android:background="#F9FAFB"
     android:orientation="vertical">
 
-    <!-- ── HEADER BAR ─────────────────────────────────────────────── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -17,7 +16,6 @@
         android:paddingStart="12dp"
         android:paddingEnd="16dp">
 
-        <!-- Nút quay lại -->
         <TextView
             android:id="@+id/btnQuizBack"
             android:layout_width="36dp"
@@ -30,7 +28,6 @@
             android:textColor="#111827"
             android:textSize="20sp" />
 
-        <!-- Tiêu đề -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -41,7 +38,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- Bộ đếm câu hỏi -->
         <TextView
             android:id="@+id/tvQuizCounter"
             android:layout_width="wrap_content"
@@ -57,7 +53,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- ── THANH TIẾN TRÌNH ──────────────────────────────────────── -->
     <ProgressBar
         android:id="@+id/quizProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -68,7 +63,6 @@
         android:progressBackgroundTint="#E5E7EB"
         android:progressTint="#DC2626" />
 
-    <!-- ── NỘI DUNG CUỘN ────────────────────────────────────────── -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -82,7 +76,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Dòng chủ đề + đồng hồ đếm ngược -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,7 +83,6 @@
                 android:layout_marginBottom="14dp"
                 android:orientation="horizontal">
 
-                <!-- Tag chủ đề -->
                 <TextView
                     android:id="@+id/tvQuizTopic"
                     android:layout_width="wrap_content"
@@ -110,7 +102,6 @@
                     android:layout_height="1dp"
                     android:layout_weight="1" />
 
-                <!-- Đồng hồ đếm ngược -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -140,7 +131,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- ── KHUNG CÂU HỎI ─────────────────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,7 +140,6 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <!-- Nhãn "Câu hỏi" -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -160,7 +149,6 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="8dp" />
 
-                <!-- Nội dung câu hỏi -->
                 <TextView
                     android:id="@+id/tvQuizQuestion"
                     android:layout_width="match_parent"
@@ -171,7 +159,6 @@
                     android:textSize="19sp"
                     android:textStyle="bold" />
 
-                <!-- Nút nghe phát âm (tuỳ chọn) -->
                 <TextView
                     android:id="@+id/btnQuizPlayAudio"
                     android:layout_width="wrap_content"
@@ -189,9 +176,6 @@
                     android:visibility="gone" />
             </LinearLayout>
 
-            <!-- ── 4 LỰA CHỌN ─────────────────────────────────────── -->
-
-            <!-- Lựa chọn A -->
             <LinearLayout
                 android:id="@+id/optionA"
                 android:layout_width="match_parent"
@@ -235,7 +219,6 @@
                     android:visibility="invisible" />
             </LinearLayout>
 
-            <!-- Lựa chọn B -->
             <LinearLayout
                 android:id="@+id/optionB"
                 android:layout_width="match_parent"
@@ -279,7 +262,6 @@
                     android:visibility="invisible" />
             </LinearLayout>
 
-            <!-- Lựa chọn C -->
             <LinearLayout
                 android:id="@+id/optionC"
                 android:layout_width="match_parent"
@@ -323,7 +305,6 @@
                     android:visibility="invisible" />
             </LinearLayout>
 
-            <!-- Lựa chọn D -->
             <LinearLayout
                 android:id="@+id/optionD"
                 android:layout_width="match_parent"
@@ -367,7 +348,6 @@
                     android:visibility="invisible" />
             </LinearLayout>
 
-            <!-- Phản hồi sau khi kiểm tra -->
             <LinearLayout
                 android:id="@+id/layoutQuizFeedback"
                 android:layout_width="match_parent"
@@ -402,7 +382,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- ── VÙNG NÚT DƯỚI ──────────────────────────────────────────── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -411,7 +390,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Nút Kiểm Tra -->
         <Button
             android:id="@+id/btnQuizCheck"
             android:layout_width="match_parent"
@@ -423,7 +401,6 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
-        <!-- Nút Câu Tiếp Theo (ẩn cho đến khi trả lời xong) -->
         <Button
             android:id="@+id/btnQuizNext"
             android:layout_width="match_parent"

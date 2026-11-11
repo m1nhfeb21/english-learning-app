@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Giao diện Điền Từ (Fill in the Blank) -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fillRoot"
     android:layout_width="match_parent"
@@ -7,7 +7,6 @@
     android:background="#F9FAFB"
     android:orientation="vertical">
 
-    <!-- ── HEADER BAR ─────────────────────────────────────────────── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -17,7 +16,6 @@
         android:paddingStart="12dp"
         android:paddingEnd="16dp">
 
-        <!-- Nút quay lại -->
         <TextView
             android:id="@+id/btnFillBack"
             android:layout_width="36dp"
@@ -30,7 +28,6 @@
             android:textColor="#111827"
             android:textSize="20sp" />
 
-        <!-- Tiêu đề -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -41,7 +38,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- Bộ đếm câu hỏi -->
         <TextView
             android:id="@+id/tvFillCounter"
             android:layout_width="wrap_content"
@@ -57,7 +53,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- ── THANH TIẾN TRÌNH ──────────────────────────────────────── -->
     <ProgressBar
         android:id="@+id/fillProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -68,7 +63,6 @@
         android:progressBackgroundTint="#E5E7EB"
         android:progressTint="#DC2626" />
 
-    <!-- ── NỘI DUNG CUỘN ────────────────────────────────────────── -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -82,7 +76,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Dòng chủ đề + tiến trình điểm số -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,7 +102,6 @@
                     android:layout_height="1dp"
                     android:layout_weight="1" />
 
-                <!-- Điểm -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -139,7 +131,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- ── KHUNG CÂU HỎI ─────────────────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,7 +140,6 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <!-- Nhãn hướng dẫn -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -159,7 +149,6 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Câu có chỗ trống (phần trước blank) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -176,7 +165,6 @@
                         android:textSize="18sp"
                         android:lineSpacingMultiplier="1.4" />
 
-                    <!-- Ô chỗ trống -->
                     <TextView
                         android:id="@+id/tvBlankSlot"
                         android:layout_width="wrap_content"
@@ -203,7 +191,6 @@
                         android:lineSpacingMultiplier="1.4" />
                 </LinearLayout>
 
-                <!-- Gợi ý nghĩa tiếng Việt -->
                 <TextView
                     android:id="@+id/tvFillHint"
                     android:layout_width="match_parent"
@@ -219,7 +206,6 @@
                     android:layout_marginTop="4dp" />
             </LinearLayout>
 
-            <!-- ── PHẦN HIỂN THỊ ĐÁP ÁN ──────────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -238,7 +224,6 @@
                     android:textSize="14sp"
                     android:layout_marginEnd="10dp" />
 
-                <!-- Từ đã chọn (hiển thị ở đây) -->
                 <TextView
                     android:id="@+id/tvSelectedWord"
                     android:layout_width="0dp"
@@ -256,7 +241,6 @@
                     android:textSize="16sp"
                     android:textStyle="italic" />
 
-                <!-- Nút xóa lựa chọn -->
                 <TextView
                     android:id="@+id/btnClearWord"
                     android:layout_width="40dp"
@@ -271,7 +255,6 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <!-- ── KHO TỪ ──────────────────────────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -289,7 +272,6 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Hàng chip từ - hàng 1 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -342,7 +324,6 @@
                         android:textSize="15sp" />
                 </LinearLayout>
 
-                <!-- Hàng chip từ - hàng 2 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -394,7 +375,6 @@
                         android:textSize="15sp" />
                 </LinearLayout>
 
-                <!-- Phản hồi sau kiểm tra -->
                 <LinearLayout
                     android:id="@+id/layoutFillFeedback"
                     android:layout_width="match_parent"
@@ -429,7 +409,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- ── VÙNG NÚT DƯỚI ──────────────────────────────────────────── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -438,7 +417,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Nút Kiểm Tra -->
         <Button
             android:id="@+id/btnFillCheck"
             android:layout_width="match_parent"
@@ -450,7 +428,6 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
-        <!-- Nút Câu Tiếp Theo (ẩn) -->
         <Button
             android:id="@+id/btnFillNext"
             android:layout_width="match_parent"

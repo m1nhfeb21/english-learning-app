@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout 
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootLayout"
@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/bg_dark">
 
-    <!-- Header Text -->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="wrap_content"
@@ -25,7 +24,7 @@
             android:text="THE ENGLISH CENTER"
             android:textColor="@color/text_red"
             android:textStyle="bold"/>
-        
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +49,6 @@
             android:textColor="#A0A0A0"/>
     </LinearLayout>
 
-    <!-- Bottom Sheet -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomSheet"
         android:layout_width="match_parent"
@@ -64,7 +62,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Constrain the scroll area to the sheet so the registration form can scroll. -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -81,7 +78,6 @@
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
 
-                <!-- Toggle Buttons -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
@@ -114,13 +110,12 @@
                         android:background="@android:color/transparent"/>
                 </LinearLayout>
 
-                <!-- Sign-in form -->
                 <LinearLayout
                     android:id="@+id/layoutSignIn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    
+
                     <EditText
                         android:id="@+id/etLoginEmail"
                         android:layout_width="match_parent"
@@ -133,7 +128,7 @@
                         android:textColor="#000000"
                         android:paddingHorizontal="16dp"
                         android:layout_marginBottom="16dp"/>
-                        
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -156,7 +151,6 @@
                             android:paddingVertical="14dp"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Checkbox & Forgot Password -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -186,7 +180,6 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- Sign-up form -->
                 <LinearLayout
                     android:id="@+id/layoutSignUp"
                     android:layout_width="match_parent"
@@ -297,7 +290,6 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
-                <!-- Submit button -->
                 <Button
                     android:id="@+id/btnSubmit"
                     android:layout_width="match_parent"
@@ -309,7 +301,6 @@
                     android:textStyle="bold"
                     app:backgroundTint="@null"/>
 
-                <!-- OR Divider -->
                 <Button
                     android:id="@+id/btnPreview"
                     android:layout_width="match_parent"
@@ -346,12 +337,11 @@
                         android:background="#D1D5DB"/>
                 </LinearLayout>
 
-                <!-- Social login buttons -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="50dp"
@@ -362,7 +352,7 @@
                         android:text="Google"
                         android:textColor="#374151"
                         android:textStyle="bold"/>
-                        
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="50dp"

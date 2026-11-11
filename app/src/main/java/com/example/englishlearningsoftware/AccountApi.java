@@ -13,7 +13,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-/** Makes network requests with Java callbacks; the Activity updates views with runOnUiThread. */
 public class AccountApi {
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     private final HttpUrl baseUrl;
@@ -32,7 +31,6 @@ public class AccountApi {
         this.baseUrl = HttpUrl.get(baseUrl);
     }
 
-    // Preserve the original API contract. Never log login URLs or passwords.
     Request loginRequest(String loginInput, String password) {
         boolean isEmail = loginInput.contains("@");
         HttpUrl url = baseUrl.newBuilder()
@@ -69,7 +67,7 @@ public class AccountApi {
 
             @Override
             public void onResponse(Call call, Response response) {
-                // Close the response even if reading its body fails.
+                // Close the response even if body parsing fails.
                 try (Response result = response) {
                     ResponseBody body = result.body();
                     String text = body == null ? "" : body.string();

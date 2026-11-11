@@ -15,16 +15,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-/**
- * Màn hình Luyện Viết (Writing Exercise).
- * Hiển thị nghĩa tiếng Việt + ví dụ, người học gõ từ tiếng Anh tương ứng.
- */
 public class WritingActivity extends AppCompatActivity {
 
-    // ── DỮ LIỆU MẪU ─────────────────────────────────────────────────────────
-    /**
-     * Mỗi câu: {nghĩa tiếng Việt, đáp án tiếng Anh, loại từ, câu ví dụ}
-     */
     private static final String[][] QUESTIONS = {
         {"Từ vựng",        "vocabulary",    "danh từ",      "She has a large ___ of English words."},
         {"Thành thạo",     "fluent",        "tính từ",      "He speaks ___ English after 2 years."},
@@ -33,7 +25,6 @@ public class WritingActivity extends AppCompatActivity {
         {"Sự lĩnh hội",    "comprehension", "danh từ",      "Reading ___ is a key IELTS skill."}
     };
 
-    // ── TRẠNG THÁI ───────────────────────────────────────────────────────────
     private int     currentIndex = 0;
     private boolean answered     = false;
     private int     score        = 0;
@@ -43,7 +34,6 @@ public class WritingActivity extends AppCompatActivity {
     private final String[] correctAnswers = new String[QUESTIONS.length];
     private final String[] questionLabels = new String[QUESTIONS.length];
 
-    // ── VIEW REFERENCES ───────────────────────────────────────────────────────
     private TextView    tvCounter, tvScore, tvMeaning, tvPartOfSpeech, tvExample, tvHint;
     private ProgressBar progressBar;
 
@@ -54,7 +44,6 @@ public class WritingActivity extends AppCompatActivity {
     private TextView     tvFeedbackIcon, tvFeedbackText;
     private Button       btnCheck, btnNext;
 
-    // ── LIFECYCLE ─────────────────────────────────────────────────────────────
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +61,6 @@ public class WritingActivity extends AppCompatActivity {
         loadQuestion(currentIndex);
     }
 
-    // ── BIND VIEWS ────────────────────────────────────────────────────────────
     private void bindViews() {
         tvCounter       = findViewById(R.id.tvWriteCounter);
         tvScore         = findViewById(R.id.tvWriteScore);
@@ -90,7 +78,6 @@ public class WritingActivity extends AppCompatActivity {
         btnNext         = findViewById(R.id.btnWriteNext);
     }
 
-    // ── THEO DÕI INPUT ────────────────────────────────────────────────────────
     private void setupTextWatcher() {
         etAnswer.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
@@ -107,7 +94,6 @@ public class WritingActivity extends AppCompatActivity {
         });
     }
 
-    /** Nhấn Done trên bàn phím → kiểm tra luôn */
     private void setupImeAction() {
         etAnswer.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE && !answered) {
@@ -118,7 +104,6 @@ public class WritingActivity extends AppCompatActivity {
         });
     }
 
-    // ── TẢI CÂU HỎI ──────────────────────────────────────────────────────────
     private void loadQuestion(int index) {
         answered  = false;
         hintShown = false;
@@ -133,22 +118,18 @@ public class WritingActivity extends AppCompatActivity {
         tvPartOfSpeech.setText(q[2]);
         tvExample.setText("Ví dụ: " + q[3]);
 
-        // Ghi nhãn kết quả
         questionLabels[index] = q[0] + " → " + q[1];
         correctAnswers[index] = q[1];
 
-        // Reset input
         etAnswer.setText("");
         etAnswer.setBackground(getDrawable(R.drawable.bg_writing_input));
         etAnswer.setEnabled(true);
         etAnswer.setHint("Nhập từ tiếng Anh...");
 
-        // Reset gợi ý
         tvHint.setVisibility(View.INVISIBLE);
         btnShowHint.setEnabled(true);
         btnShowHint.setAlpha(1f);
 
-        // Reset phản hồi & nút
         layoutFeedback.setVisibility(View.GONE);
         btnCheck.setEnabled(false);
         btnCheck.setBackground(getDrawable(R.drawable.bg_btn_disabled));
@@ -156,12 +137,11 @@ public class WritingActivity extends AppCompatActivity {
         btnNext.setVisibility(View.GONE);
     }
 
-    // ── HIỂN THỊ GỢI Ý ───────────────────────────────────────────────────────
     private void showHint() {
         if (hintShown || answered) return;
         hintShown = true;
         String word = QUESTIONS[currentIndex][1];
-        // Hiển thị chữ cái đầu + dấu gạch
+
         StringBuilder sb = new StringBuilder();
         sb.append(Character.toUpperCase(word.charAt(0)));
         for (int i = 1; i < word.length(); i++) {
@@ -173,7 +153,6 @@ public class WritingActivity extends AppCompatActivity {
         btnShowHint.setAlpha(0.5f);
     }
 
-    // ── KIỂM TRA ─────────────────────────────────────────────────────────────
     private void checkAnswer() {
         if (answered) return;
         String userInput = etAnswer.getText().toString().trim();
@@ -188,7 +167,6 @@ public class WritingActivity extends AppCompatActivity {
         if (isCorrect) score++;
         tvScore.setText(score + " điểm");
 
-        // Màu input box
         etAnswer.setEnabled(false);
         if (isCorrect) {
             etAnswer.setBackground(getDrawable(R.drawable.bg_writing_input_correct));
@@ -198,21 +176,20 @@ public class WritingActivity extends AppCompatActivity {
             etAnswer.setTextColor(Color.parseColor("#DC2626"));
         }
 
-        // Banner phản hồi
         layoutFeedback.setVisibility(View.VISIBLE);
         if (isCorrect) {
             layoutFeedback.setBackgroundColor(Color.parseColor("#DCFCE7"));
             tvFeedbackIcon.setText("🎉");
             tvFeedbackText.setText("Chính xác! Câu trả lời: \"" + correct + "\"");
             tvFeedbackText.setTextColor(Color.parseColor("#16A34A"));
-            // Hiện gợi ý luôn sau khi trả lời
+
             if (!hintShown) { hintShown = true; tvHint.setVisibility(View.INVISIBLE); }
         } else {
             layoutFeedback.setBackgroundColor(Color.parseColor("#FEE2E2"));
             tvFeedbackIcon.setText("❌");
             tvFeedbackText.setText("Chưa đúng! Đáp án: \"" + correct + "\"");
             tvFeedbackText.setTextColor(Color.parseColor("#DC2626"));
-            // Hiện đáp án đúng trong hint
+
             tvHint.setText(correct);
             tvHint.setVisibility(View.VISIBLE);
         }
@@ -223,7 +200,6 @@ public class WritingActivity extends AppCompatActivity {
         btnNext.setText(isLast ? "XEM KẾT QUẢ 🏆" : "CÂU TIẾP THEO ▶");
     }
 
-    // ── CÂU TIẾP THEO / KẾT QUẢ ──────────────────────────────────────────────
     private void nextQuestion() {
         if (currentIndex >= QUESTIONS.length - 1) {
             launchResult();

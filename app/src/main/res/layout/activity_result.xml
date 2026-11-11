@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Giao diện Kết Quả (Result Screen) -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/resultRoot"
     android:layout_width="match_parent"
@@ -7,7 +7,6 @@
     android:background="#F9FAFB"
     android:orientation="vertical">
 
-    <!-- ── HEADER ─────────────────────────────────────────────── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -39,7 +38,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- Loại bài -->
         <TextView
             android:id="@+id/tvResultType"
             android:layout_width="wrap_content"
@@ -55,7 +53,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- ── SCROLL CONTENT ────────────────────────────────────── -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -68,7 +65,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- ── VÒNG TRÒN ĐIỂM ─────────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,7 +75,6 @@
                 android:orientation="vertical"
                 android:padding="28dp">
 
-                <!-- Vòng tròn điểm -->
                 <FrameLayout
                     android:layout_width="140dp"
                     android:layout_height="140dp"
@@ -116,7 +111,6 @@
                     </LinearLayout>
                 </FrameLayout>
 
-                <!-- Sao đánh giá -->
                 <TextView
                     android:id="@+id/tvResultStars"
                     android:layout_width="wrap_content"
@@ -125,7 +119,6 @@
                     android:textSize="24sp"
                     android:layout_marginBottom="10dp" />
 
-                <!-- Thông điệp -->
                 <TextView
                     android:id="@+id/tvResultMessage"
                     android:layout_width="wrap_content"
@@ -137,14 +130,12 @@
                     android:gravity="center" />
             </LinearLayout>
 
-            <!-- ── THỐNG KÊ ─────────────────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="16dp">
 
-                <!-- Số đúng -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -158,7 +149,6 @@
                     <TextView android:id="@+id/tvResultCorrect" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4 câu đúng" android:textColor="#16A34A" android:textSize="14sp" android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Số sai -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -173,7 +163,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- ── CHI TIẾT TỪNG CÂU ──────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -191,7 +180,6 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Container cho các hàng chi tiết (sẽ được thêm động bằng Java) -->
                 <LinearLayout
                     android:id="@+id/layoutResultDetails"
                     android:layout_width="match_parent"
@@ -202,7 +190,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- ── BOTTOM BUTTONS ────────────────────────────────────── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

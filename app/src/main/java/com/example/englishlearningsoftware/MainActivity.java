@@ -23,7 +23,6 @@ import org.json.JSONObject;
 
 import okhttp3.Call;
 
-/** Authentication screen using Java, XML, findViewById, and OnClickListener. */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String STATE_SIGN_UP = "sign_up";
     private ConstraintLayout rootLayout;
@@ -58,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showForm(savedInstanceState != null
                 && savedInstanceState.getBoolean(STATE_SIGN_UP), false);
 
-        // Apply insets for the status bar, navigation bar, and keyboard.
         ViewCompat.setOnApplyWindowInsetsListener(rootLayout,
                 new androidx.core.view.OnApplyWindowInsetsListener() {
                     @Override
@@ -132,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void login() {
         String loginInput = etLoginEmail.getText().toString().trim();
-        // Passwords can contain spaces, so do not trim them.
+
         String password = etLoginPassword.getText().toString();
         if (loginInput.isEmpty() || password.isEmpty()) {
             showMessage(R.string.enter_all_fields);

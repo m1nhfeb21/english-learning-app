@@ -7,10 +7,6 @@ import android.net.Uri;
 
 import java.util.Locale;
 
-/**
- * Lightweight local storage for the UI demo.
- * Each account receives its own preferences when a backend accountId is available.
- */
 public final class ProfileStore {
     private static final String NAME_KEY = "display_name";
     private static final String GOAL_KEY = "learning_goal";

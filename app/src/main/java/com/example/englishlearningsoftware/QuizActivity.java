@@ -12,15 +12,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-/**
- * Màn hình trắc nghiệm (Multiple Choice Quiz).
- * Hiển thị câu hỏi, 4 lựa chọn A-D, đếm ngược thời gian,
- * phản hồi đúng/sai và chuyển sang ResultActivity.
- */
 public class QuizActivity extends AppCompatActivity {
 
-    // ── DỮ LIỆU MẪU ─────────────────────────────────────────────────────────
-    /** Mỗi phần tử: {câu hỏi, optionA, optionB, optionC, optionD, chỉ số đúng (0-3)} */
     private static final String[][] QUESTIONS = {
         {
             "What is the meaning of the word 'vocabulary'?",
@@ -44,7 +37,6 @@ public class QuizActivity extends AppCompatActivity {
         }
     };
 
-    // ── TRẠNG THÁI ───────────────────────────────────────────────────────────
     private int currentIndex   = 0;
     private int selectedOption = -1;
     private boolean answered   = false;
@@ -52,12 +44,10 @@ public class QuizActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private static final long TIMER_MS = 30_000L;
 
-    // Lưu kết quả để truyền sang ResultActivity
     private final String[] userAnswers    = new String[QUESTIONS.length];
     private final String[] correctAnswers = new String[QUESTIONS.length];
     private final String[] questionLabels = new String[QUESTIONS.length];
 
-    // ── VIEW REFERENCES ───────────────────────────────────────────────────────
     private TextView tvCounter, tvTimer, tvQuestion, tvTopic;
     private ProgressBar progressBar;
 
@@ -68,7 +58,6 @@ public class QuizActivity extends AppCompatActivity {
     private TextView     tvFeedbackIcon, tvFeedbackText;
     private Button       btnCheck, btnNext;
 
-    // ── LIFECYCLE ─────────────────────────────────────────────────────────────
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +79,6 @@ public class QuizActivity extends AppCompatActivity {
         cancelTimer();
     }
 
-    // ── BIND VIEWS ────────────────────────────────────────────────────────────
     private void bindViews() {
         tvCounter    = findViewById(R.id.tvQuizCounter);
         tvTimer      = findViewById(R.id.tvQuizTimer);
@@ -130,7 +118,6 @@ public class QuizActivity extends AppCompatActivity {
         btnNext         = findViewById(R.id.btnQuizNext);
     }
 
-    // ── OPTION CLICK ──────────────────────────────────────────────────────────
     private void setupOptionClickListeners() {
         for (int i = 0; i < optionLayouts.length; i++) {
             final int idx = i;
@@ -157,7 +144,6 @@ public class QuizActivity extends AppCompatActivity {
         btnCheck.setBackground(getDrawable(R.drawable.bg_primary_red));
     }
 
-    // ── TẢI CÂU HỎI ──────────────────────────────────────────────────────────
     private void loadQuestion(int index) {
         cancelTimer();
         answered       = false;
@@ -170,7 +156,6 @@ public class QuizActivity extends AppCompatActivity {
         progressBar.setProgress((int) (((index + 1) / (float) total) * 100));
         tvQuestion.setText(q[0]);
 
-        // Lưu nhãn kết quả
         questionLabels[index] = q[0];
         correctAnswers[index] = q[Integer.parseInt(q[5]) + 1];
 
@@ -196,7 +181,6 @@ public class QuizActivity extends AppCompatActivity {
         startTimer();
     }
 
-    // ── KIỂM TRA ─────────────────────────────────────────────────────────────
     private void checkAnswer() {
         if (answered || selectedOption < 0) return;
         answered = true;
@@ -206,7 +190,6 @@ public class QuizActivity extends AppCompatActivity {
         boolean isCorrect = (selectedOption == correctIdx);
         if (isCorrect) score++;
 
-        // Lưu đáp án người dùng
         userAnswers[currentIndex] = QUESTIONS[currentIndex][selectedOption + 1];
 
         for (int i = 0; i < 4; i++) {
@@ -250,7 +233,6 @@ public class QuizActivity extends AppCompatActivity {
         btnNext.setText(isLast ? "XEM KẾT QUẢ 🏆" : "CÂU TIẾP THEO ▶");
     }
 
-    // ── CÂU TIẾP THEO ────────────────────────────────────────────────────────
     private void nextQuestion() {
         if (currentIndex >= QUESTIONS.length - 1) {
             launchResult();
@@ -260,7 +242,6 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    // ── ĐỒNG HỒ ──────────────────────────────────────────────────────────────
     private void startTimer() {
         countDownTimer = new CountDownTimer(TIMER_MS, 1000) {
             @Override
@@ -300,7 +281,6 @@ public class QuizActivity extends AppCompatActivity {
         if (countDownTimer != null) { countDownTimer.cancel(); countDownTimer = null; }
     }
 
-    // ── CHUYỂN SANG MÀN HÌNH KẾT QUẢ ────────────────────────────────────────
     private void launchResult() {
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra(ResultActivity.EXTRA_TYPE,      "Trắc Nghiệm");

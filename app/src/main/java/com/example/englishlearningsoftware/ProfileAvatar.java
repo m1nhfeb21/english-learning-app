@@ -23,7 +23,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-/** Small, bounded avatar decoding shared by Profile and Home. */
 public final class ProfileAvatar {
     private static final int MAX_EDGE = 384;
     private static final ExecutorService IMAGES = Executors.newSingleThreadExecutor();
@@ -89,12 +88,13 @@ public final class ProfileAvatar {
         photo.setTag(request);
         if (uri == null) return;
         ContentResolver resolver = activity.getApplicationContext().getContentResolver();
+        // Decode off the UI thread and keep bitmaps bounded.
         IMAGES.execute(() -> {
             Bitmap bitmap = null;
             try {
                 bitmap = decode(resolver, uri);
             } catch (IOException | RuntimeException | OutOfMemoryError ignored) {
-                // A moved/deleted document or revoked permission falls back to initials.
+
             }
             Bitmap decoded = bitmap;
             activity.runOnUiThread(() -> {
